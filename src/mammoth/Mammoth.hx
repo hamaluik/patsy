@@ -15,10 +15,14 @@ class Mammoth {
 
     public static function init(
             title:String,
-            width:UInt, height:UInt,
-            ?onReady:Void->Void,
+            ?onReady:Int->Int->Void,
             updateRate:Float=60):Void {
         initContext();
+        Browser.document.title = title;
+        gl.canvas.width = Browser.window.innerWidth;
+        gl.canvas.height = Browser.window.innerHeight;
+
+        onReady(gl.canvas.width, gl.canvas.height);
     }
 
     private static function initContext() {
@@ -48,5 +52,25 @@ class Mammoth {
         }
 
         Browser.document.body.appendChild(canvas);
+    }
+
+    private static function onUpdate(dt:Float):Void {
+        // TODO
+        trace('update, dt: ${dt}');
+    }
+
+    private static function onRender(dt:Float, alpha:Float):Void {
+        // TODO
+        trace('render, dt: ${dt}, alpha: ${alpha}');
+    }
+
+    public static function begin() {
+        Timing.onUpdate = onUpdate;
+        Timing.onRender = onRender;
+        Timing.start();
+    }
+
+    public static function end() {
+        Timing.stop();
     }
 }

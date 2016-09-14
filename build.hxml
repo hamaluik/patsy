@@ -1,14 +1,14 @@
 -cp src
 -main Main
 
---macro mammoth.macros.Assets.clean()
+#--macro mammoth.macros.Assets.clean()
 --macro mammoth.macros.Assets.buildAssets()
 
 -debug
 -D source-map-content
 
--lib closure
--D closure_advanced
--D closure_overwrite
+#-lib closure
+#-D closure_advanced
+#-D closure_overwrite
 
 -js bin/game.js
