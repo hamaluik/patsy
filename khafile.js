@@ -11,12 +11,12 @@ project.addAssets('assets/final/**')
 project.addLibrary("mammoth");
 project.addLibrary("edge");
 
-(function setupMammoth() {
+/*(function setupMammoth() {
 	var libDir = '';
 	var results = require('child_process').execSync('haxelib list').toString().split('\n');
 	for (var i = 0; i < results.length; i++) {
 		if(results[i].startsWith('mammoth: [')) {
-			var libPart = results[i].substring(10, results[i].length - 1);
+			var libPart = results[i].substring(10, results[i].length - 2);
 			libDir = libPart.substr(libPart.indexOf(':') + 1);
 			break;
 		}
@@ -35,7 +35,7 @@ project.addLibrary("edge");
 			console.log('  <mammoth> added built-in ' + resourceTypes[i] + ': ' + resources[j]);
 		}
 	}
-})();
+})();*/
 
 project.addParameter('-debug');
 project.addParameter('-D source-map-content');
