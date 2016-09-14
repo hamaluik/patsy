@@ -1,67 +1,43 @@
 package mammoth;
 
-import js.Browser;
-import js.html.CanvasElement;
-import js.html.webgl.RenderingContext;
-import js.html.webgl.GL;
+import edge.Engine;
+import edge.Phase;
 
 class Mammoth {
-    private static var gl:RenderingContext;
+	// parts of our system
+    public static var engine:Engine;
+    public static var updatePhase:Phase;
+    public static var renderPhase:Phase;
 
-    private static var halfFloat:Dynamic;
-    private static var depthTexture:Dynamic;
-    private static var anisotropicFilter:Dynamic;
-    private static var drawBuffers:Dynamic;
-
+    // public timing variables
+    public static var time(get, never):Float;
+    public static function get_time():Float {
+        return Timing.time;
+    }
+    public static var alpha(get, never):Float;
+    public static function get_alpha():Float {
+        return Timing.alpha;
+    }
+    
     public static function init(
             title:String,
             ?onReady:Int->Int->Void,
             updateRate:Float=60):Void {
-        initContext();
-        Browser.document.title = title;
-        gl.canvas.width = Browser.window.innerWidth;
-        gl.canvas.height = Browser.window.innerHeight;
+        // initialize our subsystems
+        Context.init(title);
+        Timing.dt = 1 / updateRate;
 
-        onReady(gl.canvas.width, gl.canvas.height);
-    }
+        // initialize the ECS
+        engine = new Engine();
+        updatePhase = engine.createPhase();
+        renderPhase = engine.createPhase();
 
-    private static function initContext() {
-        var canvas:CanvasElement = Browser.document.createCanvasElement();
-        gl = canvas.getContextWebGL({
-            alpha: false,
-            antialias: false,
-            depth: true,
-            premultipliedAlpha: true,
-            preserveDrawingBuffer: true,
-            stencil: true,
-        });
+        // initialize our rendering
+        renderPhase.add(new mammoth.systems.ModelMatrixSystem());
+        renderPhase.add(new mammoth.systems.CameraSystem());
+        renderPhase.add(new mammoth.systems.RenderSystem());
 
-        if(gl != null) {
-            gl.pixelStorei(GL.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1);
-            gl.getExtension("OES_texture_float");
-            gl.getExtension("OES_texture_float_linear");
-            halfFloat = gl.getExtension("OES_texture_half_float");
-            gl.getExtension("OES_texture_half_float_linear");
-            depthTexture = gl.getExtension("WEBGL_depth_texture");
-            gl.getExtension("EXT_shader_texture_lod");
-            gl.getExtension("OES_standard_derivatives");
-            anisotropicFilter = gl.getExtension("EXT_texture_filter_anisotropic");
-            if(anisotropicFilter == null)
-                anisotropicFilter = gl.getExtension("WEBKIT_EXT_texture_filter_anisotropic");
-            drawBuffers = gl.getExtension("WEBGL_draw_buffers");
-        }
-
-        Browser.document.body.appendChild(canvas);
-    }
-
-    private static function onUpdate(dt:Float):Void {
-        // TODO
-        trace('update, dt: ${dt}');
-    }
-
-    private static function onRender(dt:Float, alpha:Float):Void {
-        // TODO
-        trace('render, dt: ${dt}, alpha: ${alpha}');
+        onReady(Context.gl.canvas.width, Context.gl.canvas.height);
     }
 
     public static function begin() {
@@ -72,5 +48,13 @@ class Mammoth {
 
     public static function end() {
         Timing.stop();
+    }
+
+    private static function onUpdate(dt:Float):Void {
+        updatePhase.update(dt);
+    }
+
+    private static function onRender(dt:Float, alpha:Float):Void {
+        renderPhase.update(dt);
     }
 }

@@ -1,6 +1,9 @@
 -cp src
 -main Main
 
+-lib edge
+-lib glm
+
 #--macro mammoth.macros.Assets.clean()
 --macro mammoth.macros.Assets.buildAssets()
 
