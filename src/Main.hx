@@ -4,10 +4,11 @@ import mammoth.Mammoth;
 
 class Main {
     public static function main() {
-        Mammoth.init('Patsy', 960, 540, onReady);
+        trace("woo!");
+        Mammoth.init("Patsy", 960, 540, onReady, 60);
     }
 
-    public static function onReady():Void {
-        Mammoth.start();
+    private static function onReady():Void {
+        trace("ready!");
     }
 }
