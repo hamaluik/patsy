@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project version="2">
+	<!-- Output SWF options -->
+	<output>
+		<movie outputType="Application" />
+		<movie input="" />
+		<movie path="html5/kha.js" />
+		<movie fps="30" />
+		<movie width="960" />
+		<movie height="540" />
+		<movie version="16" />
+		<movie minorVersion="0" />
+		<movie platform="JavaScript" />
+		<movie background="#ffffff" />
+		<movie preferredSDK="../../../../.haxe/kha/git/Tools/haxe" />
+	</output>
+	<!-- Other classes to be compiled into your SWF -->
+	<classpaths>
+		<class path="/home/kenton/.haxe/kha/git/Sources" />
+		<class path="/home/kenton/.haxe/kha/git/Backends/HTML5" />
+		<class path="../src" />
+		<class path="/home/kenton/Projects/blazingmammothgames/mammoth/src" />
+		<class path="/home/kenton/.haxe/zui/git/Sources" />
+		<class path="/home/kenton/.haxe/edge/0,7,0/src" />
+		<class path="/home/kenton/.haxe/thx,core/0,40,1/src" />
+		<class path="/home/kenton/Projects/blazingmammothgames/mammoth" />
+		<class path="/home/kenton/.haxe/zui/git" />
+		<class path="/home/kenton/.haxe/edge/0,7,0" />
+		<class path="/home/kenton/.haxe/thx,core/0,40,1" />
+	</classpaths>
+	<!-- Build options -->
+	<build>
+		<option directives="" />
+		<option flashStrict="False" />
+		<option noInlineOnDebug="False" />
+		<option mainClass="Main" />
+		<option enabledebug="False" />
+		<option additional="-D mammoth&#xA;-D zui&#xA;-D edge&#xA;-D thx.core&#xA;-D edge&#xA;-D thx.core&#xA;-D sys_g1&#xA;-D sys_g2&#xA;-D sys_g3&#xA;-D sys_g4&#xA;-D sys_a1&#xA;-D sys_a2&#xA;-D webgl&#xA;-D sys_html5&#xA;-D kha&#xA;-D kha_version=1609&#xA;-D kha_output=&quot;/home/kenton/Projects/blazingmammothgames/patsy/build/html5/kha.js&quot;&#xA;-D thx_core&#xA;-D thx_core&#xA;-resource /home/kenton/Projects/blazingmammothgames/mammoth/src/assets/shaders/blinnphong.frag.glsl@shader/blinnphong.frag.glsl&#xA;-resource /home/kenton/Projects/blazingmammothgames/mammoth/src/assets/shaders/blinnphong.vert.glsl@shader/blinnphong.vert.glsl&#xA;-resource /home/kenton/Projects/blazingmammothgames/mammoth/src/assets/shaders/diffuse.frag.glsl@shader/diffuse.frag.glsl&#xA;-resource /home/kenton/Projects/blazingmammothgames/mammoth/src/assets/shaders/diffuse.vert.glsl@shader/diffuse.vert.glsl&#xA;-resource /home/kenton/Projects/blazingmammothgames/mammoth/src/assets/shaders/gamma.frag.glsl@shader/gamma.frag.glsl&#xA;-resource /home/kenton/Projects/blazingmammothgames/mammoth/src/assets/shaders/gamma.vert.glsl@shader/gamma.vert.glsl&#xA;-resource /home/kenton/Projects/blazingmammothgames/mammoth/src/assets/shaders/unlitColoured.frag.glsl@shader/unlitColoured.frag.glsl&#xA;-resource /home/kenton/Projects/blazingmammothgames/mammoth/src/assets/shaders/unlitColoured.vert.glsl@shader/unlitColoured.vert.glsl&#xA;-resource /home/kenton/Projects/blazingmammothgames/mammoth/src/assets/fonts/DroidSans.ttf@font/DroidSans.ttf&#xA;-resource /home/kenton/Projects/blazingmammothgames/mammoth/src/assets/images/black.png@image/black.png&#xA;-resource /home/kenton/Projects/blazingmammothgames/mammoth/src/assets/images/specring.png@image/specring.png&#xA;-resource /home/kenton/Projects/blazingmammothgames/mammoth/src/assets/images/uvgrid.png@image/uvgrid.png&#xA;-resource /home/kenton/Projects/blazingmammothgames/mammoth/src/assets/images/white.png@image/white.png&#xA;-debug&#xA;-D source-map-content&#xA;" />
+	</build>
+	<!-- haxelib libraries -->
+	<haxelib>
+		<!-- example: <library name="..." /> -->
+	</haxelib>
+	<!-- Class files to compile (other referenced classes will automatically be included) -->
+	<compileTargets>
+		<compile path="..\Sources\Main.hx" />
+	</compileTargets>
+	<!-- Paths to exclude from the Project Explorer tree -->
+	<hiddenPaths>
+		<!-- example: <hidden path="..." /> -->
+	</hiddenPaths>
+	<!-- Executed before build -->
+	<preBuildCommand />
+	<!-- Executed after build -->
+	<postBuildCommand alwaysRun="False" />
+	<!-- Other project options -->
+	<options>
+		<option showHiddenPaths="False" />
+		<option testMovie="Webserver" />
+		<option testMovieCommand="html5/index.html" />
+	</options>
+	<!-- Plugin storage -->
+	<storage />
+</project>

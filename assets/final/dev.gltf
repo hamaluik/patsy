@@ -1,0 +1,575 @@
+{
+    "accessors": {
+        "Courtyard Grass_buffer_accessor_0": {
+            "bufferView": "Courtyard Grass_buffer_view_0",
+            "byteOffset": 0,
+            "byteStride": 24,
+            "componentType": 5126,
+            "count": 24,
+            "max": [
+                14.0,
+                14.0,
+                0
+            ],
+            "min": [
+                -14.0,
+                -14.0,
+                0
+            ],
+            "type": "VEC3"
+        },
+        "Courtyard Grass_buffer_accessor_1": {
+            "bufferView": "Courtyard Grass_buffer_view_0",
+            "byteOffset": 12,
+            "byteStride": 24,
+            "componentType": 5126,
+            "count": 24,
+            "max": [
+                0,
+                0,
+                1.0
+            ],
+            "min": [
+                0,
+                0,
+                0
+            ],
+            "type": "VEC3"
+        },
+        "Courtyard Grass_buffer_accessor_2": {
+            "bufferView": "Courtyard Grass_buffer_view_1",
+            "byteOffset": 0,
+            "byteStride": 2,
+            "componentType": 5123,
+            "count": 48,
+            "max": [
+                23
+            ],
+            "min": [
+                0
+            ],
+            "type": "SCALAR"
+        },
+        "Courtyard Walk_buffer_accessor_0": {
+            "bufferView": "Courtyard Walk_buffer_view_0",
+            "byteOffset": 0,
+            "byteStride": 24,
+            "componentType": 5126,
+            "count": 108,
+            "max": [
+                14.0,
+                14.0,
+                0.10000000149011612
+            ],
+            "min": [
+                -14.0,
+                -14.0,
+                0
+            ],
+            "type": "VEC3"
+        },
+        "Courtyard Walk_buffer_accessor_1": {
+            "bufferView": "Courtyard Walk_buffer_view_0",
+            "byteOffset": 12,
+            "byteStride": 24,
+            "componentType": 5126,
+            "count": 108,
+            "max": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "min": [
+                -1.0,
+                -1.0,
+                0
+            ],
+            "type": "VEC3"
+        },
+        "Courtyard Walk_buffer_accessor_2": {
+            "bufferView": "Courtyard Walk_buffer_view_1",
+            "byteOffset": 0,
+            "byteStride": 2,
+            "componentType": 5123,
+            "count": 174,
+            "max": [
+                107
+            ],
+            "min": [
+                0
+            ],
+            "type": "SCALAR"
+        },
+        "Fountain_buffer_accessor_0": {
+            "bufferView": "Fountain_buffer_view_0",
+            "byteOffset": 0,
+            "byteStride": 24,
+            "componentType": 5126,
+            "count": 196,
+            "max": [
+                1.4999998807907104,
+                1.5,
+                0.25
+            ],
+            "min": [
+                -1.5000001192092896,
+                -1.5,
+                0
+            ],
+            "type": "VEC3"
+        },
+        "Fountain_buffer_accessor_1": {
+            "bufferView": "Fountain_buffer_view_0",
+            "byteOffset": 12,
+            "byteStride": 24,
+            "componentType": 5126,
+            "count": 196,
+            "max": [
+                0.9807853102684021,
+                0.9807853698730469,
+                1.0
+            ],
+            "min": [
+                -0.9807853698730469,
+                -0.9807853698730469,
+                0
+            ],
+            "type": "VEC3"
+        },
+        "Fountain_buffer_accessor_2": {
+            "bufferView": "Fountain_buffer_view_1",
+            "byteOffset": 0,
+            "byteStride": 2,
+            "componentType": 5123,
+            "count": 330,
+            "max": [
+                195
+            ],
+            "min": [
+                0
+            ],
+            "type": "SCALAR"
+        },
+        "Sidewalk_buffer_accessor_0": {
+            "bufferView": "Sidewalk_buffer_view_0",
+            "byteOffset": 0,
+            "byteStride": 24,
+            "componentType": 5126,
+            "count": 20,
+            "max": [
+                21.0,
+                1.0,
+                0.10000000149011612
+            ],
+            "min": [
+                -21.0,
+                -1.0,
+                0
+            ],
+            "type": "VEC3"
+        },
+        "Sidewalk_buffer_accessor_1": {
+            "bufferView": "Sidewalk_buffer_view_0",
+            "byteOffset": 12,
+            "byteStride": 24,
+            "componentType": 5126,
+            "count": 20,
+            "max": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "min": [
+                -1.0,
+                -1.0,
+                0
+            ],
+            "type": "VEC3"
+        },
+        "Sidewalk_buffer_accessor_2": {
+            "bufferView": "Sidewalk_buffer_view_1",
+            "byteOffset": 0,
+            "byteStride": 2,
+            "componentType": 5123,
+            "count": 30,
+            "max": [
+                19
+            ],
+            "min": [
+                0
+            ],
+            "type": "SCALAR"
+        }
+    },
+    "asset": {
+        "profile": {
+            "api": "WebGL",
+            "version": "1.0.3"
+        },
+        "version": "1.0"
+    },
+    "bufferViews": {
+        "Courtyard Grass_buffer_view_0": {
+            "buffer": "Courtyard Grass_buffer",
+            "byteLength": 576,
+            "byteOffset": 0,
+            "target": 34962
+        },
+        "Courtyard Grass_buffer_view_1": {
+            "buffer": "Courtyard Grass_buffer",
+            "byteLength": 96,
+            "byteOffset": 576,
+            "target": 34963
+        },
+        "Courtyard Walk_buffer_view_0": {
+            "buffer": "Courtyard Walk_buffer",
+            "byteLength": 2592,
+            "byteOffset": 0,
+            "target": 34962
+        },
+        "Courtyard Walk_buffer_view_1": {
+            "buffer": "Courtyard Walk_buffer",
+            "byteLength": 348,
+            "byteOffset": 2592,
+            "target": 34963
+        },
+        "Fountain_buffer_view_0": {
+            "buffer": "Fountain_buffer",
+            "byteLength": 4704,
+            "byteOffset": 0,
+            "target": 34962
+        },
+        "Fountain_buffer_view_1": {
+            "buffer": "Fountain_buffer",
+            "byteLength": 660,
+            "byteOffset": 4704,
+            "target": 34963
+        },
+        "Sidewalk_buffer_view_0": {
+            "buffer": "Sidewalk_buffer",
+            "byteLength": 480,
+            "byteOffset": 0,
+            "target": 34962
+        },
+        "Sidewalk_buffer_view_1": {
+            "buffer": "Sidewalk_buffer",
+            "byteLength": 60,
+            "byteOffset": 480,
+            "target": 34963
+        }
+    },
+    "buffers": {
+        "Courtyard Grass_buffer": {
+            "byteLength": 672,
+            "type": "arraybuffer",
+            "uri": "data:text/plain;base64,AABgwVTzkr8AAAAAAAAAAAAAAAAAAIA/AABgQVTzkj8AAAAAAAAAAAAAAAAAAIA/S/OSv4hiMUAAAAAAAAAAAAAAAAAAAIA/S/OSvwAAYMEAAAAAAAAAAAAAAAAAAIA/AABgQVTzkr8AAAAAAAAAAAAAAAAAAIA/AABgwVTzkj8AAAAAAAAAAAAAAAAAAIA/h2IxQFTzkr8AAAAAAAAAAAAAAAAAAIA/h2IxwFTzkj8AAAAAAAAAAAAAAAAAAIA/AABgwQAAYEEAAAAAAAAAAAAAAAAAAIA/tcMHwLnDB0AAAAAAAAAAAAAAAAAAAIA/tcMHwLnDB8AAAAAAAAAAAAAAAAAAAIA/S/OSP4hiMUAAAAAAAAAAAAAAAAAAAIA/S/OSv4hiMcAAAAAAAAAAAAAAAAAAAIA/S/OSPwAAYEEAAAAAAAAAAAAAAAAAAIA/tcMHQLnDB8AAAAAAAAAAAAAAAAAAAIA/S/OSPwAAYMEAAAAAAAAAAAAAAAAAAIA/S/OSvwAAYEEAAAAAAAAAAAAAAAAAAIA/AABgwQAAYMEAAAAAAAAAAAAAAAAAAIA/AABgQQAAYMEAAAAAAAAAAAAAAAAAAIA/S/OSP4hiMcAAAAAAAAAAAAAAAAAAAIA/tcMHQLnDB0AAAAAAAAAAAAAAAAAAAIA/h2IxwFTzkr8AAAAAAAAAAAAAAAAAAIA/h2IxQFTzkj8AAAAAAAAAAAAAAAAAAIA/AABgQQAAYEEAAAAAAAAAAAAAAAAAAIA/EwAPABIAEwASAAQAEwAEAAYAEwAGAA4AEQADAAwAEQAMAAoAEQAKABUAEQAVAAAAFwANAAsAFwALABQAFwAUABYAFwAWAAEAAgAQAAgAAgAIAAUAAgAFAAcAAgAHAAkA"
+        },
+        "Courtyard Walk_buffer": {
+            "byteLength": 2940,
+            "type": "arraybuffer",
+            "uri": "data:text/plain;base64,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RfOSPwAAYEHNzMw9AACAPwAAAAAAAAAAS/OSP4hiMcDNzMw9AAAAAAAAAAAAAIA/tsMHwLbDB8AAAAAAMttUv9s5Dr8AAAAAUPOSv4ZiMcAAAAAAAACAvwAAAAAAAAAARfOSP4piMUDNzMw9AACAPwAAAAAAAAAAUPOSvwAAYMEAAAAAAAAAAAAAgL8AAAAAhmIxQFTzkj/NzMw9AAAAAAAAAAAAAIA/AABgQVTzkj8AAAAAAAAAAAAAgD8AAAAAAABgwVDzkj/NzMw9AAAAAAAAgD8AAAAAUPOSvwAAYMHNzMw9AAAAAAAAAAAAAIA/tMMHQLnDB0DNzMw91zkOPzTbVD8AAAAAhmIxwFLzkr/NzMw9MttUv9s5Dr8AAAAAh2IxQFTzkr/NzMw9J4qaMAAAAAAAAIA/h2IxQFTzkr/NzMw9AAAAAAAAgL8AAAAAtcMHQLnDB8AAAAAAMNtUP9w5Dr8AAAAAtsMHwLbDB0DNzMw9J4qaMAAAAAAAAIA/hmIxQFTzkj/NzMw9MNtUP9w5Dj8AAAAAhmIxwFLzkr8AAAAAMttUv9s5Dr8AAAAAh2IxQFTzkr/NzMw9AAAAAAAAAAAAAIA/tMMHQLnDB0AAAAAA1zkOPzTbVD8AAAAAh2IxQFTzkr8AAAAAAAAAAAAAgL8AAAAAhmIxwFLzkr/NzMw9J4qaMAAAAAAAAIA/UPOSv4ZiMUDNzMw92jkOvzHbVD8AAAAAtMMHQLnDB0DNzMw9MNtUP9w5Dj8AAAAAUPOSvwAAYEEAAAAAAAAAAAAAgD8AAAAAtcMHQLnDB8DNzMw9J4qaMAAAAAAAAIA/UPOSvwAAYEHNzMw9AAAAAAAAgD8AAAAAhmIxwFDzkj/NzMw9MttUv9k5Dj8AAAAAhmIxQFTzkj8AAAAAAAAAAAAAgD8AAAAAtMMHQLnDB0DNzMw9J4qaMAAAAAAAAIA/hmIxwFLzkr/NzMw9AAAAAAAAAAAAAIA/UPOSv4ZiMcDNzMw9AAAAAAAAAAAAAIA/hmIxQFTzkj8AAAAAMNtUP9w5Dj8AAAAATABqAFQATABUAEgAUQBdAD4AUQA+AAAAMQAmAEQAMQBEABIAaQAHACAAaQAgABwAKQALAGQAKQBkAFcAKQBXADUAKQA1AGgAKQBoAEEAKQBBAAIAKQACAFoAKQBaADMAKQAzAGAAKQBgABUADwBSAGcADwBnACQAKgAFADYAKgA2AEIAFgAQAAMAFgADABMAVgBcAE0AVgBNACwAWABfAD8AWAA/ACEAWwBrADIAWwAyAGIARgAfAAgARgAIACcAFAABACsAFAArAC8AVQBeADwAVQA8ABgACgA6ACgACgAoAAYALQAdAEoALQBKAAwADgBQADgADgA4ABoAFwBAAEUAFwBFAFMAYQAbABkAYQAZACIASQBOABEASQARADkAPQAJADAAPQAwACMAOwAlAAQAOwAEAGYAQwA0AGMAQwBjAGUARwBZAC4ARwAuAA0ATwA3AB4ATwAeAEsA"
+        },
+        "Fountain_buffer": {
+            "byteLength": 5364,
+            "type": "arraybuffer",
+            "uri": "data:text/plain;base64,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"
+        },
+        "Sidewalk_buffer": {
+            "byteLength": 540,
+            "type": "arraybuffer",
+            "uri": "data:text/plain;base64,AACoQQAAgD/NzMw9AAAAAAAAAAAAAIA/AACowQAAgL8AAAAAAACAvwAAAAAAAAAAAACoQQAAgL8AAAAAAACAPwAAAAAAAAAAAACowQAAgL/NzMw9AAAAAAAAAAAAAIA/AACowQAAgD/NzMw9AAAAAAAAgD8AAAAAAACoQQAAgL/NzMw9AAAAAAAAAAAAAIA/AACowQAAgD/NzMw9AACAvwAAAAAAAAAAAACowQAAgD/NzMw9AAAAAAAAAAAAAIA/AACowQAAgD8AAAAAAACAvwAAAAAAAAAAAACoQQAAgD8AAAAAAACAPwAAAAAAAAAAAACoQQAAgD8AAAAAAAAAAAAAgD8AAAAAAACowQAAgD8AAAAAAAAAAAAAgD8AAAAAAACowQAAgL/NzMw9AACAvwAAAAAAAAAAAACoQQAAgL/NzMw9AACAPwAAAAAAAAAAAACoQQAAgL8AAAAAAAAAAAAAgL8AAAAAAACoQQAAgL/NzMw9AAAAAAAAgL8AAAAAAACowQAAgL8AAAAAAAAAAAAAgL8AAAAAAACoQQAAgD/NzMw9AACAPwAAAAAAAAAAAACoQQAAgD/NzMw9AAAAAAAAgD8AAAAAAACowQAAgL/NzMw9AAAAAAAAgL8AAAAABwADAAUABwAFAAAAEwAQAA4AEwAOAA8ADQACAAkADQAJABEABgAIAAEABgABAAwAEgAKAAsAEgALAAQA"
+        }
+    },
+    "extensions": {
+        "BLENDER_actions": {
+            "actions": {}
+        }
+    },
+    "extensionsUsed": [
+        "BLENDER_actions",
+        "BLENDER_physics"
+    ],
+    "extras": {
+        "lights": {
+            "Sun": {
+                "directional": {
+                    "color": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                "type": "directional"
+            }
+        }
+    },
+    "materials": {
+        "Material": {
+            "values": {
+                "ambient": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "diffuse": [
+                    0.64000004529953,
+                    0.64000004529953,
+                    0.64000004529953,
+                    1.0
+                ],
+                "emission": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "shininess": 50,
+                "specular": [
+                    0.5,
+                    0.5,
+                    0.5,
+                    1.0
+                ],
+                "textures": [],
+                "uv_layers": [
+                    ""
+                ]
+            }
+        }
+    },
+    "meshes": {
+        "Courtyard Grass": {
+            "name": "Courtyard Grass",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "Courtyard Grass_buffer_accessor_1",
+                        "POSITION": "Courtyard Grass_buffer_accessor_0"
+                    },
+                    "indices": "Courtyard Grass_buffer_accessor_2",
+                    "material": "",
+                    "mode": 4
+                }
+            ]
+        },
+        "Courtyard Walk": {
+            "name": "Courtyard Walk",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "Courtyard Walk_buffer_accessor_1",
+                        "POSITION": "Courtyard Walk_buffer_accessor_0"
+                    },
+                    "indices": "Courtyard Walk_buffer_accessor_2",
+                    "material": "",
+                    "mode": 4
+                }
+            ]
+        },
+        "Fountain": {
+            "name": "Fountain",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "Fountain_buffer_accessor_1",
+                        "POSITION": "Fountain_buffer_accessor_0"
+                    },
+                    "indices": "Fountain_buffer_accessor_2",
+                    "material": "Material",
+                    "mode": 4
+                }
+            ]
+        },
+        "Sidewalk": {
+            "name": "Sidewalk",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "Sidewalk_buffer_accessor_1",
+                        "POSITION": "Sidewalk_buffer_accessor_0"
+                    },
+                    "indices": "Sidewalk_buffer_accessor_2",
+                    "material": "",
+                    "mode": 4
+                }
+            ]
+        }
+    },
+    "nodes": {
+        "Courtyard Grass": {
+            "children": [],
+            "matrix": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "meshes": [
+                "Courtyard Grass"
+            ],
+            "name": "Courtyard Grass"
+        },
+        "Courtyard Walk": {
+            "children": [],
+            "matrix": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "meshes": [
+                "Courtyard Walk"
+            ],
+            "name": "Courtyard Walk"
+        },
+        "Fountain": {
+            "children": [],
+            "matrix": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "meshes": [
+                "Fountain"
+            ],
+            "name": "Fountain"
+        },
+        "Player": {
+            "camera": "Player",
+            "children": [],
+            "matrix": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                -4.371138828673793e-08,
+                1.0,
+                0.0,
+                0.0,
+                -1.0,
+                -4.371138828673793e-08,
+                0.0,
+                0.0,
+                -7.5,
+                1.7999999523162842,
+                1.0
+            ],
+            "name": "Player"
+        },
+        "Sidewalk": {
+            "children": [],
+            "matrix": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                -15.0,
+                0.0,
+                1.0
+            ],
+            "meshes": [
+                "Sidewalk"
+            ],
+            "name": "Sidewalk"
+        },
+        "Sun": {
+            "children": [],
+            "extras": {
+                "light": "Sun"
+            },
+            "matrix": [
+                -0.28698328137397766,
+                0.9551711678504944,
+                -0.07272276282310486,
+                0.0,
+                -0.8063348531723022,
+                -0.19988326728343964,
+                0.5566603541374207,
+                0.0,
+                0.5171698927879333,
+                0.21839112043380737,
+                0.8275509476661682,
+                0.0,
+                4.076245307922363,
+                1.0054539442062378,
+                5.903861999511719,
+                1.0
+            ],
+            "name": "Sun"
+        }
+    },
+    "samplers": {
+        "default": {}
+    },
+    "scene": "Scene",
+    "scenes": {
+        "Scene": {
+            "extras": {
+                "active_camera": "Player",
+                "background_color": [
+                    0.05087608844041824,
+                    0.05087608844041824,
+                    0.05087608844041824
+                ],
+                "frames_per_second": 24,
+                "hidden_nodes": []
+            },
+            "nodes": [
+                "Courtyard Grass",
+                "Sidewalk",
+                "Courtyard Walk",
+                "Fountain",
+                "Sun",
+                "Player"
+            ]
+        }
+    }
+}

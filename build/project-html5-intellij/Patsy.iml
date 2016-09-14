@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="HAXE_MODULE" version="4">
+  <component name="HaxeModuleSettingsStorage">
+    <option name="arguments" value="" />
+    <option name="buildConfig" value="1" />
+    <option name="excludeFromCompilation" value="true" />
+    <option name="flexSdkName" value="flex_sdk_4.6" />
+    <option name="haxeTarget" value="JavaScript" />
+    <option name="hxmlPath" value="$MODULE_DIR$/../project-html5.hxml" />
+    <option name="mainClass" value="Main" />
+    <option name="outputFileName" value="kha.swf" />
+    <option name="outputFolder" value="$MODULE_DIR$/../html5" />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../html5" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../..">
+      <sourceFolder url="file:///home/kenton/.haxe/kha/git/Sources" isTestSource="false" />
+      <sourceFolder url="file:///home/kenton/.haxe/kha/git/Backends/HTML5" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../src" isTestSource="false" />
+      <sourceFolder url="file:///home/kenton/Projects/blazingmammothgames/mammoth/src" isTestSource="false" />
+      <sourceFolder url="file:///home/kenton/.haxe/zui/git/Sources" isTestSource="false" />
+      <sourceFolder url="file:///home/kenton/.haxe/edge/0,7,0/src" isTestSource="false" />
+      <sourceFolder url="file:///home/kenton/.haxe/thx,core/0,40,1/src" isTestSource="false" />
+      <sourceFolder url="file:///home/kenton/.haxe/edge/0,7,0/src" isTestSource="false" />
+      <sourceFolder url="file:///home/kenton/.haxe/thx,core/0,40,1/src" isTestSource="false" />
+
+    </content>
+    <content url="file:///home/kenton/.haxe/mammoth">
+      <sourceFolder url="file:///home/kenton/Projects/blazingmammothgames/mammoth" isTestSource="false" />
+    </content>
+    <content url="file:///home/kenton/.haxe/zui">
+      <sourceFolder url="file:///home/kenton/.haxe/zui/git" isTestSource="false" />
+    </content>
+    <content url="file:///home/kenton/.haxe/edge">
+      <sourceFolder url="file:///home/kenton/.haxe/edge/0,7,0" isTestSource="false" />
+    </content>
+    <content url="file:///home/kenton/.haxe/thx,core">
+      <sourceFolder url="file:///home/kenton/.haxe/thx,core/0,40,1" isTestSource="false" />
+    </content>
+    <content url="file:///home/kenton/.haxe/edge">
+      <sourceFolder url="file:///home/kenton/.haxe/edge/0,7,0" isTestSource="false" />
+    </content>
+    <content url="file:///home/kenton/.haxe/thx,core">
+      <sourceFolder url="file:///home/kenton/.haxe/thx,core/0,40,1" isTestSource="false" />
+    </content>
+    
+    <orderEntry type="jdk" jdkName="Haxe 3.2.0" jdkType="Haxe toolkit" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
