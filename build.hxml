@@ -4,8 +4,8 @@
 -lib edge
 -lib glm
 
-#--macro mammoth.macros.Assets.clean()
---macro mammoth.macros.Assets.buildAssets()
+--macro mammoth.macros.Assets.copyProjectAssets()
+--macro mammoth.macros.Assets.makeIndex('Patsy')
 
 -debug
 -D source-map-content
@@ -15,3 +15,4 @@
 #-D closure_overwrite
 
 -js bin/game.js
+-cmd http-server -c-1 bin
