@@ -7,8 +7,12 @@ import mammoth.Assets;
 import mammoth.components.Camera;
 import mammoth.components.MeshRenderer;
 import mammoth.components.Transform;
+import mammoth.defaults.Primitives;
 import mammoth.Mammoth;
+import mammoth.render.Attribute;
+import mammoth.render.CullMode;
 import mammoth.render.Material;
+import mammoth.render.TAttribute;
 import mammoth.render.TUniform;
 import mammoth.utilities.Colour;
 import gltf.GLTF;
@@ -50,11 +54,12 @@ class Main {
                 .setRotation(new Quat(0, 0, 0.383734, 0.9234437))
                 .setScale(1, 1, 1),
             new MeshRenderer()
-                //.setMesh(Primitives.cube(true, true, true))
+                .setMesh(Primitives.screenQuad())
                 .setMaterial(new Material("cube", Mammoth.graphics)
                     .setVertexShader(vertex)
                     .setFragmentShader(fragment)
                     .compile()
+                    .registerAttribute("position", new Attribute(TAttribute.Vec2, 0, 0))
                     .setUniform("canvasSize", TUniform.Float2(Mammoth.width, Mammoth.height)))
         ]);
 

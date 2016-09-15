@@ -8,6 +8,7 @@ import mammoth.debug.Exception;
 import mammoth.Graphics;
 import mammoth.Mammoth;
 import mammoth.GL;
+import mammoth.render.Attribute;
 import mammoth.render.CullMode;
 import mammoth.render.DepthCompareMode;
 import mammoth.render.TUniform;
@@ -21,6 +22,7 @@ class Material {
 	private var fragmentShader:Shader;
 
 	public var name(default, null):String;
+	public var attributes(default, null):StringMap<Attribute>;
 	public var uniforms(default, null):StringMap<Uniform>;
 
 	public var cullMode:CullMode = CullMode.Back;
@@ -30,6 +32,7 @@ class Material {
 	public function new(name:String, graphics:Graphics) {
 		this.name = name;
 		this.context = graphics.context;
+		this.attributes = new StringMap<Attribute>();
 		this.uniforms = new StringMap<Uniform>();
 	}
 
@@ -68,6 +71,11 @@ class Material {
 		return this;
 	}
 
+	public function registerAttribute(name:String, attribute:Attribute):Material {
+		attributes.set(name, attribute);
+		return this;
+	}
+
 	public function setUniform(name:String, value:TUniform):Material {
 		if(uniforms.exists(name)) {
 			uniforms.get(name).value = value;
@@ -78,6 +86,21 @@ class Material {
 			uniforms.set(name, uniform);
 		}
 		return this;
+	}
+
+	public function setCullMode(cullMode:CullMode):Material {
+		this.cullMode = cullMode;
+		return this;
+	}
+
+	public function bindAttributes() {
+		for(name in attributes.keys()) {
+			var attribute:Attribute = attributes.get(name);
+			if(attribute.bound) continue;
+			attribute.location = context.getAttribLocation(program, name);
+			context.enableVertexAttribArray(attribute.location);
+			attribute.bound = true;
+		}
 	}
 
 	public function bindUniforms() {
@@ -182,5 +205,8 @@ class Material {
 				}*/
 			}
 		}
+
+		// prepare for render data
+		bindAttributes();
 	}
 }
