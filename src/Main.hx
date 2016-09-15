@@ -8,8 +8,9 @@ class Main {
         Mammoth.init("Patsy", onReady, 60);
     }
 
-    private static function onReady(?width:Int, ?height:Int):Void {
-        trace('ready! ${width}x${height}');
-        Mammoth.begin();
+    public static function onReady():Void {
+    	Mammoth.fullscreen = true;
+    	Mammoth.mouseLocked = true;
+        Mammoth.start();
     }
 }
