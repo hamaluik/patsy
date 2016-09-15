@@ -4,6 +4,9 @@
 -lib edge
 -lib glm
 
+-D window.width=960
+-D window.height=540
+
 --macro mammoth.macros.Assets.copyProjectAssets()
 --macro mammoth.macros.Assets.makeIndex('Patsy')
 

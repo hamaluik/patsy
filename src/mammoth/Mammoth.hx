@@ -3,6 +3,7 @@ package mammoth;
 import edge.Engine;
 import edge.Phase;
 import mammoth.Graphics;
+import mammoth.macros.Defines;
 
 class Mammoth {
 	// parts of our system
@@ -23,17 +24,23 @@ class Mammoth {
     // public size variables
     public static var width(get, never):Float;
     public static function get_width():Float
-        return graphics.gl.canvas.width;
+        return graphics.context.canvas.width;
     public static var height(get, never):Float;
     public static function get_height():Float
-        return graphics.gl.canvas.height;
+        return graphics.context.canvas.height;
+
+    static macro function getDefine(key:String):Expr
+        return macro $v{Context.definedValue(key)};
+
+    static macro function isDefined(key:String):Expr
+        return macro $v{Context.defined(key)};
     
-    public static function init(
-            title:String,
-            ?onReady:Void->Void,
-            updateRate:Float=60):Void {
+    public static function init(title:String, ?onReady:Void->Void, updateRate:Float=60):Void {
+        var width:Int = Defines.isDefined("window.width") ? Std.parseInt(Defines.getDefine("window.width")) : 960;
+        var height:Int = Defines.isDefined("window.height") ? Std.parseInt(Defines.getDefine("window.height")) : 540;
+
         // initialize our subsystems
-        graphics.init(title);
+        graphics.init(title, width, height);
         Timing.dt = 1 / updateRate;
 
         // initialize the ECS

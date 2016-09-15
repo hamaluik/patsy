@@ -3,19 +3,20 @@ package mammoth;
 import js.Browser;
 import js.html.CanvasElement;
 import js.html.webgl.RenderingContext;
-import js.html.webgl.GL;
+import mammoth.utilities.Colour;
 
 @:allow(mammoth.Mammoth)
 class Graphics {
     public var context:RenderingContext;
-    public var gl:js.html.webgl.GL;
 
-    public var halfFloat:Dynamic;
-    public var depthTexture:Dynamic;
-    public var anisotropicFilter:Dynamic;
-    public var drawBuffers:Dynamic;
+    private var halfFloat:Dynamic;
+    private var depthTexture:Dynamic;
+    private var anisotropicFilter:Dynamic;
+    private var drawBuffers:Dynamic;
 
-    private function init(title:String) {
+    private function new() {}
+
+    private function init(title:String, width:Int, height:Int) {
         Browser.document.title = title;
 
         // create our canvas
@@ -47,7 +48,25 @@ class Graphics {
 
         // add the canvas to the body
         Browser.document.body.appendChild(canvas);
-        context.canvas.width = Browser.window.innerWidth;
-        context.canvas.height = Browser.window.innerHeight;
+        context.canvas.width = width;
+        context.canvas.height = height;
     }
+
+    inline public function clearColour(colour:Colour)
+        context.clearColor(colour.r, colour.g, colour.b, colour.a);
+
+    inline public function enable(cap:Int)
+        context.enable(cap);
+
+    inline public function depthFunc(func:Int)
+        context.depthFunc(func);
+
+    inline public function clear(mask:Int)
+        context.clear(mask);
+
+    inline public function viewport(x:Int, y:Int, w:Int, h:Int)
+        context.viewport(x, y, w, h);
+
+    inline public function scissor(x:Int, y:Int, w:Int, h:Int)
+        context.scissor(x, y, w, h);
 }
