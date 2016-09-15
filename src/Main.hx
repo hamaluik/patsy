@@ -5,7 +5,7 @@ import mammoth.Mammoth;
 class Main {
     public static function main() {
         trace("woo!");
-        Mammoth.init("Patsy", onReady, 60);
+        Mammoth.init("Patsy", 960, 540, onReady);
     }
 
     public static function onReady():Void {
