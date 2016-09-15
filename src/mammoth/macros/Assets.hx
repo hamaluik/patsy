@@ -6,34 +6,56 @@ import sys.FileSystem;
 import haxe.io.Path;
 
 class Assets {
-    public static function clean() {
-        var cwd:String = Sys.getCwd();
-        var binFolder = Path.join([cwd, "bin"]);
-        var numRemoved:UInt = 0;
-        var files:Array<String> = FileSystem.readDirectory(binFolder);
-        for(f in files) {
-            var file:String = Path.join([binFolder, f]);
-            FileSystem.deleteFile(file);
-            numRemoved++;
-        }
+    private static function copy(sourceDir:String, targetDir:String):Int {
+        var numCopied:Int = 0;
 
-        trace('Removed ${numRemoved} files from bin!');
+        if(!FileSystem.exists(targetDir))
+            FileSystem.createDirectory(targetDir);
+
+        for(entry in FileSystem.readDirectory(sourceDir)) {
+            var srcFile:String = Path.join([sourceDir, entry]);
+            var dstFile:String = Path.join([targetDir, entry]);
+
+            if(FileSystem.isDirectory(srcFile))
+                numCopied += copy(srcFile, dstFile);
+            else {
+                File.copy(srcFile, dstFile);
+                numCopied++;
+            }
+        }
+        return numCopied;
     }
 
-    public static function buildAssets() {
+    public static function copyProjectAssets() {
         var cwd:String = Sys.getCwd();
-        var assetFolder = Path.join([cwd, "assets", "final"]);
-        var binFolder = Path.join([cwd, "bin"]);
-        var finalAssets:Array<String> = FileSystem.readDirectory(assetFolder);
-        var numCopied:UInt = 0;
+        var assetSrcFolder = Path.join([cwd, "src", "assets"]);
+        var assetsDstFolder = Path.join([cwd, "bin", "assets"]);
 
-        for(asset in finalAssets) {
-            var src:String = Path.join([assetFolder, asset]);
-            var dest:String = Path.join([binFolder, asset]);
-            File.copy(src, dest);
-            numCopied++;
-        }
+        // make sure the assets folder exists
+        if(!FileSystem.exists(assetsDstFolder))
+            FileSystem.createDirectory(assetsDstFolder);
 
-        trace('Copied ${numCopied} asset files!');
+        // copy it!
+        var numCopied = copy(assetSrcFolder, assetsDstFolder);
+        Sys.println('[mammoth] copied ${numCopied} project assets to bin!');
+    }
+
+    public static function makeIndex(title:String) {
+        var indexFile = Path.join([Sys.getCwd(), "bin", "index.html"]);
+        File.saveContent(indexFile, '<html>
+    <head>
+        <title>${title}</title>
+        <style>
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="game.js"></script>
+    </body>
+</html>');
     }
 }

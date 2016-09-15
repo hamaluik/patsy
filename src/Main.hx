@@ -1,15 +1,19 @@
 package;
 
+import mammoth.components.Transform;
 import mammoth.Mammoth;
 
 class Main {
     public static function main() {
         trace("woo!");
-        Mammoth.init("Patsy", onReady, 60);
+        Mammoth.init("Patsy", onReady);
     }
 
-    private static function onReady(?width:Int, ?height:Int):Void {
-        trace('ready! ${width}x${height}');
+    private static function onReady():Void {
+    	Mammoth.engine.create([
+    		new Transform()
+    	]);
+
         Mammoth.begin();
     }
 }

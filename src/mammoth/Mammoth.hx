@@ -11,17 +11,23 @@ class Mammoth {
 
     // public timing variables
     public static var time(get, never):Float;
-    public static function get_time():Float {
+    public static function get_time():Float
         return Timing.time;
-    }
     public static var alpha(get, never):Float;
-    public static function get_alpha():Float {
+    public static function get_alpha():Float
         return Timing.alpha;
-    }
+
+    // public size variables
+    public static var width(get, never):Float;
+    public static function get_width():Float
+        return Context.gl.canvas.width;
+    public static var height(get, never):Float;
+    public static function get_height():Float
+        return Context.gl.canvas.height;
     
     public static function init(
             title:String,
-            ?onReady:Int->Int->Void,
+            ?onReady:Void->Void,
             updateRate:Float=60):Void {
         // initialize our subsystems
         Context.init(title);
@@ -37,7 +43,8 @@ class Mammoth {
         renderPhase.add(new mammoth.systems.CameraSystem());
         renderPhase.add(new mammoth.systems.RenderSystem());
 
-        onReady(Context.gl.canvas.width, Context.gl.canvas.height);
+        if(onReady != null)
+            onReady();
     }
 
     public static function begin() {
