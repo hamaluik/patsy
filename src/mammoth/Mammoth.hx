@@ -2,12 +2,15 @@ package mammoth;
 
 import edge.Engine;
 import edge.Phase;
+import mammoth.Graphics;
 
 class Mammoth {
 	// parts of our system
     public static var engine:Engine;
     public static var updatePhase:Phase;
     public static var renderPhase:Phase;
+
+    public static var graphics:Graphics = new Graphics();
 
     // public timing variables
     public static var time(get, never):Float;
@@ -20,17 +23,17 @@ class Mammoth {
     // public size variables
     public static var width(get, never):Float;
     public static function get_width():Float
-        return Context.gl.canvas.width;
+        return graphics.gl.canvas.width;
     public static var height(get, never):Float;
     public static function get_height():Float
-        return Context.gl.canvas.height;
+        return graphics.gl.canvas.height;
     
     public static function init(
             title:String,
             ?onReady:Void->Void,
             updateRate:Float=60):Void {
         // initialize our subsystems
-        Context.init(title);
+        graphics.init(title);
         Timing.dt = 1 / updateRate;
 
         // initialize the ECS
