@@ -12,6 +12,7 @@
 
 -debug
 -D source-map-content
+-dce std
 
 #-lib closure
 #-D closure_advanced

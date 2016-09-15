@@ -54,19 +54,4 @@ class Graphics {
 
     inline public function clearColour(colour:Colour)
         context.clearColor(colour.r, colour.g, colour.b, colour.a);
-
-    inline public function enable(cap:Int)
-        context.enable(cap);
-
-    inline public function depthFunc(func:Int)
-        context.depthFunc(func);
-
-    inline public function clear(mask:Int)
-        context.clear(mask);
-
-    inline public function viewport(x:Int, y:Int, w:Int, h:Int)
-        context.viewport(x, y, w, h);
-
-    inline public function scissor(x:Int, y:Int, w:Int, h:Int)
-        context.scissor(x, y, w, h);
 }

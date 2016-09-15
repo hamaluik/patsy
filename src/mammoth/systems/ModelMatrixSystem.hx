@@ -6,7 +6,7 @@ import glm.GLM;
 import mammoth.components.Transform;
 
 class ModelMatrixSystem implements ISystem {
-    public function update(transform:Transform) {
+    private function calculateModelMatrix(transform:Transform) {
         transform.wasDirty = false;
         if(!transform.dirty)
             return;
@@ -18,8 +18,17 @@ class ModelMatrixSystem implements ISystem {
             ),
             transform.position);
 
+        if(transform.parent != null) {
+            calculateModelMatrix(transform.parent);
+            transform.m = transform.parent.m * transform.m;
+        }
+
         transform.dirty = false;
         transform.wasDirty = true;
+    }
+
+    public function update(transform:Transform) {
+        calculateModelMatrix(transform);
     }
 }
 

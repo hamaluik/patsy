@@ -23,4 +23,29 @@ class Transform implements IComponent {
     	if(scale != null)    this.scale = scale;
     	if(parent != null)   this.parent = parent;
     }
+
+    public function setPosition(x:Float, y:Float, z:Float):Transform {
+        position.x = x;
+        position.y = y;
+        position.z = z;
+        dirty = true;
+        return this;
+    }
+
+    public function setRotation(rot:Quat):Transform {
+        rotation.x = rot.x;
+        rotation.y = rot.y;
+        rotation.z = rot.z;
+        rotation.w = rot.w;
+        dirty = true;
+        return this;
+    }
+
+    public function setScale(sx:Float, sy:Float, sz:Float):Transform {
+        scale.x = sx;
+        scale.y = sy;
+        scale.z = sz;
+        dirty = true;
+        return this;
+    }
 }
