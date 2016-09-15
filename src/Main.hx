@@ -9,8 +9,8 @@ class Main {
     }
 
     public static function onReady():Void {
-    	Mammoth.fullscreen = true;
-    	Mammoth.mouseLocked = true;
+        Mammoth.fullscreen = true;
+        Mammoth.mouseLocked = true;
         Mammoth.start();
     }
 }
