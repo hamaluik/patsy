@@ -3,6 +3,8 @@
 
 -lib edge
 -lib glm
+-lib gltf
+-lib promhx
 
 -D window.width=960
 -D window.height=540

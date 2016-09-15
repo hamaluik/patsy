@@ -2,6 +2,8 @@ package;
 
 import glm.Quat;
 import glm.Vec2;
+import haxe.io.Bytes;
+import mammoth.Assets;
 import mammoth.components.Camera;
 import mammoth.components.MeshRenderer;
 import mammoth.components.Transform;
@@ -9,6 +11,7 @@ import mammoth.Mammoth;
 import mammoth.render.Material;
 import mammoth.render.TUniform;
 import mammoth.utilities.Colour;
+import gltf.GLTF;
 
 class Main {
     public static function main() {
