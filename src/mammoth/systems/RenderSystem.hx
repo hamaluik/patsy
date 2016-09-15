@@ -47,7 +47,7 @@ class RenderSystem implements ISystem {
                 if(!material.attributes.exists(attributeName)) continue;
                 var attribute:Attribute = material.attributes.get(attributeName);
                 
-                //g.context.enableVertexAttribArray(attribute.location);
+                g.context.enableVertexAttribArray(attribute.location);
                 g.context.vertexAttribPointer(
                     attribute.location,
                     switch(attribute.type) {
@@ -65,8 +65,12 @@ class RenderSystem implements ISystem {
             g.context.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, mesh.indexBuffer);
             g.context.drawElements(GL.TRIANGLES, mesh.vertexCount, GL.UNSIGNED_SHORT, 0);
 
-            // bindBuffers()
-            // drawIndexedVertices()
+            // TODO: ?
+            /*for(attributeName in mesh.attributeNames) {
+                if(!material.attributes.exists(attributeName)) continue;
+                var attribute:Attribute = material.attributes.get(attributeName);
+                g.context.disableVertexAttribArray(attribute.location);
+            }*/
         }
     }
 }

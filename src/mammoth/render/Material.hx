@@ -98,7 +98,6 @@ class Material {
 			var attribute:Attribute = attributes.get(name);
 			if(attribute.bound) continue;
 			attribute.location = context.getAttribLocation(program, name);
-			context.enableVertexAttribArray(attribute.location);
 			attribute.bound = true;
 		}
 	}
