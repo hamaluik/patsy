@@ -15,7 +15,6 @@ import mammoth.render.Material;
 import mammoth.render.TAttribute;
 import mammoth.render.TUniform;
 import mammoth.utilities.Colour;
-import gltf.GLTF;
 
 class Main {
     public static function main() {

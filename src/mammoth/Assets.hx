@@ -9,7 +9,6 @@ import js.html.XMLHttpRequestResponseType;
 import mammoth.debug.Exception;
 import promhx.Deferred;
 import promhx.Promise;
-import gltf.GLTF;
 
 @:build(mammoth.macros.Assets.buildAssetList())
 class Assets {
@@ -47,17 +46,6 @@ class Assets {
 
 		load(path)
 			.then(function(b:Bytes) { d.resolve(Json.parse(b.toString())); })
-			.catchError(function(e:Dynamic) { d.throwError(e); });
-
-		return p;
-	}
-
-	public static function loadGLTF(path:String):Promise<GLTF> {
-		var d:Deferred<GLTF> = new Deferred<GLTF>();
-		var p:Promise<GLTF> = d.promise();
-
-		load(path)
-			.then(function(b:Bytes) { d.resolve(GLTF.parse(b.toString())); })
 			.catchError(function(e:Dynamic) { d.throwError(e); });
 
 		return p;
