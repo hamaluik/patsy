@@ -18,6 +18,9 @@ import mammoth.Log;
 import edge.Entity;
 import glm.Vec2;
 
+import mammoth.components.DirectionalLight;
+import mammoth.components.PointLight;
+
 class Loader {
     private function new(){}
 
@@ -61,7 +64,20 @@ class Loader {
             if(object.light != null && file.lights != null) {
                 for(light in file.lights) {
                     if(light.name == object.light) {
-                        // TODO
+                        entity.add(switch(light.type) {
+                            case mammoth.loader.Light.LightType.Directional: {
+                                var dirLight:DirectionalLight = new DirectionalLight();
+                                dirLight.setColour(mammoth.utilities.Colour.fromVec4(cast(light.colour)));
+                                dirLight;
+                            }
+                            case mammoth.loader.Light.LightType.Point: {
+                                var pointLight:PointLight = new PointLight();
+                                pointLight.setColour(mammoth.utilities.Colour.fromVec4(cast(light.colour)));
+                                pointLight.setDistance(light.distance);
+                                pointLight;
+                            }
+                        });
+
                         Log.debug('  with light: ${light.name}');
                     }
                 }

@@ -37,6 +37,10 @@ class Colour {
         return new Vec4(r, g, b, a);
     }
 
+    public static function fromVec4(v:Vec4) {
+        return new Colour(v.r, v.g, v.b, v.a);
+    }
+
     public static var Black:Colour = new Colour(0, 0, 0);
     public static var White:Colour = new Colour(1, 1, 1);
 }
