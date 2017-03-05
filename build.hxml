@@ -9,12 +9,18 @@
 -D window.height=540
 -D window.full
 
---macro mammoth.macros.Assets.copyProjectAssets()
---macro mammoth.macros.Assets.makeIndex('Patsy')
+-D log_fatal
+-D log_error
+-D log_warning
+-D log_info
+-D assertions
 
 -debug
 -D source-map-content
--dce std
+-dce full
+
+--macro mammoth.macros.Assets.copyProjectAssets()
+--macro mammoth.macros.Assets.makeIndex('Patsy')
 
 #-lib closure
 #-D closure_advanced
