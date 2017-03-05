@@ -3,7 +3,6 @@ package mammoth.components;
 import edge.IComponent;
 import glm.Mat4;
 import glm.Vec3;
-import glm.Vec4;
 import glm.Quat;
 
 class Transform implements IComponent {

@@ -1,6 +1,5 @@
 package mammoth.render;
 
-import js.html.webgl.RenderingContext;
 import mammoth.render.TAttribute;
 
 @:allow(mammoth.render.Material)

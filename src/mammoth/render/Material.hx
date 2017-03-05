@@ -6,7 +6,6 @@ import js.html.webgl.RenderingContext;
 import js.html.webgl.Shader;
 import mammoth.debug.Exception;
 import mammoth.Graphics;
-import mammoth.Mammoth;
 import mammoth.GL;
 import mammoth.render.Attribute;
 import mammoth.render.CullMode;
