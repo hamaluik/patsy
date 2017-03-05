@@ -13,17 +13,21 @@
 */
 package mammoth.loader;
 
-import mammoth.loader.Colour;
-
-@:enum
-abstract LightType(String) {
-	var Directional = "directional";
-	var Point = "point";
-}
-
-typedef Light = {
+typedef Mesh = {
     var name:String;
-    var type:LightType;
-    var colour:Colour;
-    @:optional var distance:Float;
+
+    /**
+     *  URI (most likely data-uri) of vertex data for the mesh
+     */
+    var vertices:String;
+
+    /**
+     *  Ordered array specifying how vertex data is laid out in `vertices`
+     */
+    var vlayout:Array<String>;
+
+    /**
+     *  URI (most likely data-uri) of triangle indices of the mesh
+     */
+    var indices:String;
 }

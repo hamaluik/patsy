@@ -13,17 +13,9 @@
 */
 package;
 
-import glm.Quat;
-import glm.Vec2;
-import mammoth.components.Camera;
-import mammoth.components.MeshRenderer;
-import mammoth.components.Transform;
-import mammoth.defaults.Primitives;
 import mammoth.Mammoth;
-import mammoth.render.Attribute;
-import mammoth.render.Material;
-import mammoth.render.TAttribute;
-import mammoth.utilities.Colour;
+import mammoth.Assets;
+import mammoth.Log;
 
 class Main {
     public static function main() {
@@ -31,7 +23,18 @@ class Main {
     }
 
     private static function onReady():Void {
-    	Mammoth.engine.create([
+        Log.info("Loading cubescene...");
+        Assets.loadJSON(Assets.asset___cubescene__json)
+            .then(function(data:Dynamic) {
+                mammoth.loader.Loader.load(data);
+                Mammoth.begin();
+            })
+            .catchError(function(e:Dynamic) {
+                Log.error(e);
+            });
+
+
+    	/*Mammoth.engine.create([
     		new Transform()
                 .setPosition(2.1810226, -4.74123, 2.361527)
                 .setRotation(new Quat(0.5776544, 0.1232913, 0.1594744, 0.7910011)),
@@ -69,8 +72,6 @@ class Main {
                     .compile()
                     .registerAttribute("position", new Attribute(TAttribute.Vec2, 0, 0))
                     .setUniform("canvasSize", TUniform.Float2(Mammoth.width, Mammoth.height)))
-        ]);
-
-        Mammoth.begin();
+        ]);*/
     }
 }
