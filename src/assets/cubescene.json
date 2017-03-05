@@ -1,0 +1,134 @@
+{
+    "cameras": [
+        {
+            "aspect": 1.703595982340029,
+            "far": 100.0,
+            "fov": 0.5033799409866333,
+            "name": "Camera",
+            "near": 0.10000000149011612,
+            "type": "perspective"
+        }
+    ],
+    "images": [],
+    "lights": [
+        {
+            "colour": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "name": "Sun",
+            "type": "directional"
+        }
+    ],
+    "materials": [
+        {
+            "diffuse": {
+                "ambient": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "colour": [
+                    0.14581455290317535,
+                    0.64000004529953,
+                    0.1044430360198021,
+                    1.0
+                ]
+            },
+            "name": "Cube",
+            "textures": {}
+        }
+    ],
+    "meshes": [
+        {
+            "indices": "data:text/plain;base64,AQAAAAMAAAAAAAAABwAAAAUAAAAEAAAABAAAAAEAAAAAAAAABQAAAAIAAAABAAAAAgAAAAcAAAADAAAAAAAAAAcAAAAEAAAAAQAAAAIAAAADAAAABwAAAAYAAAAFAAAABAAAAAUAAAABAAAABQAAAAYAAAACAAAAAgAAAAYAAAAHAAAAAAAAAAMAAAAHAAAA",
+            "name": "Cube",
+            "vertices": "data:text/plain;base64,AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/+v9/vwMAgD8AAIC/KM0TvyjNEz8ozRO/AACAP///fz8AAIC/KM0TPyjNEz8ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/BACAP/f/fz8AAIA/KM0TPyjNEz8ozRM/BACAP/f/fz8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AACAP///fz8AAIC/KM0TPyjNEz8ozRO/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/+v9/vwMAgD8AAIC/KM0TvyjNEz8ozRO/AACAP///fz8AAIC/KM0TPyjNEz8ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/BACAP/f/fz8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO/+v9/vwMAgD8AAIC/KM0TvyjNEz8ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/AwCAv/r/f78AAIA/KM0TvyjNE78ozRM/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/BACAP/f/fz8AAIA/KM0TPyjNEz8ozRM/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/AwCAv/r/f78AAIA/KM0TvyjNE78ozRM/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO/AwCAv/r/f78AAIA/KM0TvyjNE78ozRM///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAP///fz8AAIC/KM0TPyjNEz8ozRO/+v9/vwMAgD8AAIC/KM0TvyjNEz8ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/",
+            "vlayout": [
+                "pos",
+                "norm"
+            ]
+        }
+    ],
+    "meta": {
+        "blender": "2.78 (sub 0)",
+        "exporter_version": "0.0.0",
+        "file": "cubescene_blend"
+    },
+    "objects": [
+        {
+            "camera": "Camera",
+            "name": "Camera",
+            "transform": {
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    7.481131553649902,
+                    -6.5076398849487305,
+                    5.34366512298584
+                ]
+            }
+        },
+        {
+            "mesh": "Cube",
+            "name": "Cube",
+            "transform": {
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            }
+        },
+        {
+            "light": "Sun",
+            "name": "Sun",
+            "transform": {
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    3.0012269020080566,
+                    1.5111247301101685,
+                    6.259036540985107
+                ]
+            }
+        }
+    ],
+    "textures": [
+        {
+            "name": "Tex",
+            "type": "none"
+        }
+    ]
+}

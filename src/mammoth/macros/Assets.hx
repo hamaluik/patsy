@@ -20,8 +20,6 @@ import sys.io.File;
 import sys.FileSystem;
 import haxe.io.Path;
 
-using StringTools;
-
 class Assets {
     private static function copy(sourceDir:String, targetDir:String):Int {
         var numCopied:Int = 0;
@@ -43,6 +41,7 @@ class Assets {
         return numCopied;
     }
 
+#ifdef sys
     public static function copyProjectAssets() {
         var cwd:String = Sys.getCwd();
         var assetSrcFolder = Path.join([cwd, "src", "assets"]);
@@ -75,6 +74,7 @@ class Assets {
     </body>
 </html>');
     }
+#endif
 
     public static function buildAssetList():Array<Field> {
         var fields:Array<Field> = Context.getBuildFields();
