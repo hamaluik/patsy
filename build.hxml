@@ -7,6 +7,7 @@
 
 -D window.width=960
 -D window.height=540
+-D window.full
 
 --macro mammoth.macros.Assets.copyProjectAssets()
 --macro mammoth.macros.Assets.makeIndex('Patsy')

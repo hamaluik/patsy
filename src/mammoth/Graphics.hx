@@ -27,6 +27,10 @@ class Graphics {
     private var anisotropicFilter:Dynamic;
     private var drawBuffers:Dynamic;
 
+    private var unFullWidth:Int;
+    private var unFullHeight:Int;
+    private var fullWindowed:Bool = false;
+
     private function new() {}
 
     private function init(title:String, width:Int, height:Int) {
@@ -63,6 +67,31 @@ class Graphics {
         Browser.document.body.appendChild(canvas);
         context.canvas.width = width;
         context.canvas.height = height;
+
+        // listen to resize events
+        Browser.window.onresize = onResize;
+    }
+
+    private function fullWindow(full:Bool) {
+        if(full) {
+            unFullWidth = context.canvas.width;
+            unFullHeight = context.canvas.height;
+
+            context.canvas.width = Browser.window.innerWidth;
+            context.canvas.height = Browser.window.innerHeight;
+        }
+        else {
+            context.canvas.width = unFullWidth;
+            context.canvas.height = unFullHeight;
+        }
+        fullWindowed = full;
+    }
+
+    private function onResize() {
+        if(fullWindowed) {
+            context.canvas.width = Browser.window.innerWidth;
+            context.canvas.height = Browser.window.innerHeight;
+        }
     }
 
     inline public function clearColour(colour:Colour)

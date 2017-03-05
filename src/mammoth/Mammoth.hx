@@ -54,6 +54,10 @@ class Mammoth {
 
         // initialize our subsystems
         graphics.init(title, width, height);
+        if(Defines.isDefined("window.full"))
+            graphics.fullWindow(true);
+
+        // calculate the clock period
         Timing.dt = 1 / updateRate;
 
         // initialize the ECS
