@@ -21,6 +21,11 @@ import glm.Vec2;
 import mammoth.components.DirectionalLight;
 import mammoth.components.PointLight;
 
+import haxe.crypto.Base64;
+import haxe.io.Bytes;
+
+using StringTools;
+
 class Loader {
     private function new(){}
 
@@ -93,5 +98,15 @@ class Loader {
                 }
             }
         }
+    }
+
+    private static function parseFloatArrayURI<T>(uri:String):Array<Float> {
+        if(!uri.startsWith('data:text/plain;base64,') {
+            return new Array<Float>();
+        }
+
+        var data:Bytes = Base64.decode(uri.substr('data:text/plain;base64,'.length));
+        var arr:haxe.io.Float32Array = haxe.io.Float32Array.fromBytes(data);
+        
     }
 }
