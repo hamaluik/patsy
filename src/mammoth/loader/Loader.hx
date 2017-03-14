@@ -18,11 +18,13 @@ import mammoth.Log;
 import edge.Entity;
 import glm.Vec2;
 
+import mammoth.Mammoth;
 import mammoth.components.DirectionalLight;
 import mammoth.components.PointLight;
 
 import haxe.crypto.Base64;
 import haxe.io.Bytes;
+import haxe.ds.StringMap;
 
 using StringTools;
 
@@ -31,6 +33,17 @@ class Loader {
 
     public static function load(file:MammothFile):Void {
         Log.info('Loading data from ${file.meta.file}..');
+
+        // create materials
+        var materials:StringMap<mammoth.render.Material> = new StringMap<mammoth.render.Material>();
+        for(mat in file.materials) {
+            Log.debug('loading material ${mat.name}');
+            var material:mammoth.render.Material  = new mammoth.render.Material(mat.name, Mammoth.graphics);
+
+            
+
+            materials.set(mat.name, material);
+        }
         
         for(object in file.objects) {
             Log.debug("creating entity");
