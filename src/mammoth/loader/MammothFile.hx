@@ -38,7 +38,7 @@ typedef MammothFile = {
     
     var cameras:Array<Camera>;
     var lights:Array<Light>;
-    var materials:Array<Material>;
+    var shaders:Array<Shader>;
     var meshes:Array<Mesh>;
     var objects:Array<Object>;
 }

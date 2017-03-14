@@ -15,18 +15,18 @@ package mammoth.loader;
 
 import mammoth.loader.Colour;
 
-typedef UnlitMaterial = {
+typedef UnlitShader = {
     var colour:Colour;
 }
 
-typedef DiffuseMaterial = {
+typedef DiffuseShader = {
     var ambient:Colour;
     var colour:Colour;
 }
 
-typedef Material = {
+typedef Shader = {
     var name:String;
     var textures:Array<String>;
-    @:optional var unlit:UnlitMaterial;
-    @:optional var diffuse:DiffuseMaterial;
+    @:optional var unlit:UnlitShader;
+    @:optional var diffuse:DiffuseShader;
 }

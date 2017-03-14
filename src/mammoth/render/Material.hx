@@ -20,6 +20,7 @@ import js.html.webgl.Shader;
 import mammoth.debug.Exception;
 import mammoth.Graphics;
 import mammoth.GL;
+import mammoth.defaults.StandardShader;
 import mammoth.render.Attribute;
 import mammoth.render.CullMode;
 import mammoth.render.DepthCompareMode;
@@ -30,8 +31,10 @@ import mammoth.render.Uniform;
 class Material {
 	private var context:RenderingContext;
 	private var program:Program;
-	private var vertexShader:Shader;
-	private var fragmentShader:Shader;
+	private var vertexShader:String;
+	private var fragmentShader:String;
+
+	public var standardShader:StandardShader;
 
 	public var name(default, null):String;
 	public var attributes(default, null):StringMap<Attribute>;
@@ -48,32 +51,42 @@ class Material {
 		this.uniforms = new StringMap<Uniform>();
 	}
 
-	private function compileShader(type:Int, source:String):Shader {
-		var shader:Shader = context.createShader(type);
+	private function compileShader(type:TShaderType, source:String):Shader {
+		var shader:Shader = context.createShader(cast(type));
 		context.shaderSource(shader, source);
 		context.compileShader(shader);
 		if(!context.getShaderParameter(shader, GL.COMPILE_STATUS)) {
 			var info:String = context.getShaderInfoLog(shader);
-			var typeStr:String = type == GL.VERTEX_SHADER ? 'Vertex' : 'Fragment';
+			var typeStr:String = type == TShaderType.Vertex ? 'Vertex' : 'Fragment';
 			throw new Exception(info, true, 'Compile${typeStr}Shader');
 		}
 		return shader;
 	}
 
+	public function setStandardShader(shader:StandardShader):Material {
+		standardShader = shader;
+		return this;
+	}
+
 	public function setVertexShader(source:String):Material {
-		vertexShader = compileShader(GL.VERTEX_SHADER, source);
+		vertexShader = source;
 		return this;
 	}
 
 	public function setFragmentShader(source:String):Material {
-		fragmentShader = compileShader(GL.FRAGMENT_SHADER, source);
+		fragmentShader = source;
 		return this;
 	}
 
 	public function compile():Material {
+		// compile the shaders first
+		var vertex:Shader = compileShader(TShaderType.Vertex, standardShader == null ? vertexShader : standardShader.vertex);
+		var fragment:Shader = compileShader(TShaderType.Fragment, standardShader == null ? fragmentShader : standardShader.fragment);
+
+		// and link them together
 		program = context.createProgram();
-		context.attachShader(program, vertexShader);
-		context.attachShader(program, fragmentShader);
+		context.attachShader(program, vertex);
+		context.attachShader(program, fragment);
 
 		context.linkProgram(program);
 		if(!context.getProgramParameter(program, GL.LINK_STATUS)) {

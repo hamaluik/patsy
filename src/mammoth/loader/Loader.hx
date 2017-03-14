@@ -13,7 +13,6 @@
 */
 package mammoth.loader;
 
-import mammoth.Mammoth;
 import mammoth.Log;
 import edge.Entity;
 import glm.Vec2;
@@ -21,12 +20,11 @@ import glm.Vec2;
 import mammoth.Mammoth;
 import mammoth.components.DirectionalLight;
 import mammoth.components.PointLight;
+import mammoth.defaults.StandardShader;
+import mammoth.defaults.StandardShader.StandardAttributes;
+import mammoth.defaults.StandardShader.StandardUniforms;
 
-import haxe.crypto.Base64;
-import haxe.io.Bytes;
 import haxe.ds.StringMap;
-
-using StringTools;
 
 class Loader {
     private function new(){}
@@ -34,17 +32,65 @@ class Loader {
     public static function load(file:MammothFile):Void {
         Log.info('Loading data from ${file.meta.file}..');
 
-        // create materials
-        var materials:StringMap<mammoth.render.Material> = new StringMap<mammoth.render.Material>();
-        for(mat in file.materials) {
-            Log.debug('loading material ${mat.name}');
-            var material:mammoth.render.Material  = new mammoth.render.Material(mat.name, Mammoth.graphics);
+        // load cameras
+        var cameras:StringMap<mammoth.components.Camera> = new StringMap<mammoth.components.Camera>();
+        for(camera in file.cameras) {
+            var cam:mammoth.components.Camera = new mammoth.components.Camera();
+            cam.setNearFar(camera.near, camera.far);
+            cam.setClearColour(mammoth.utilities.Colour.Black);
+            cam.setProjection(switch(camera.type) {
+                case mammoth.loader.Camera.CameraType.Orthographic:
+                    mammoth.components.Camera.ProjectionMode.Orthographic(camera.ortho_size);
+                case mammoth.loader.Camera.CameraType.Perspective:
+                    mammoth.components.Camera.ProjectionMode.Perspective(camera.fov);
+            });
+            cam.setViewport(new Vec2(0, 0), new Vec2(1, 1));
 
-            
+            cameras.set(camera.name, cam);
+        }
 
-            materials.set(mat.name, material);
+        // load lights
+        var lights:StringMap<edge.IComponent> = new StringMap<edge.IComponent>();
+        for(light in file.lights) {
+            lights.set(light.name, switch(light.type) {
+                case mammoth.loader.Light.LightType.Directional: {
+                    var dirLight:DirectionalLight = new DirectionalLight();
+                    dirLight.setColour(mammoth.utilities.Colour.fromVec4(cast(light.colour)));
+                    dirLight;
+                }
+                case mammoth.loader.Light.LightType.Point: {
+                    var pointLight:PointLight = new PointLight();
+                    pointLight.setColour(mammoth.utilities.Colour.fromVec4(cast(light.colour)));
+                    pointLight.setDistance(light.distance);
+                    pointLight;
+                }
+            });
+        }
+
+        // load shaders
+        var shaders:StringMap<StandardShader> = new StringMap<StandardShader>();
+        for(shad in file.shaders) {
+            Log.debug('loading shader ${shad.name}');
+            var shader:StandardShader = new StandardShader();
+
+            if(shad.unlit != null) {
+                if(shad.textures.length > 0) {
+                    shader.setUniform(StandardUniforms.Texture);
+                }
+            }
+            else if(shad.diffuse != null) {
+                shader.setUniform(StandardUniforms.AmbientColour);
+                shader.setUniform(StandardUniforms.DirectionalLights);
+            }
+
+            if(shad.textures.length > 0) {
+                shader.setUniform(StandardUniforms.Texture);
+            }
+
+            shaders.set(shad.name, shader);
         }
         
+        // load actual objects
         for(object in file.objects) {
             Log.debug("creating entity");
             var entity:Entity = Mammoth.engine.create([]);
@@ -56,70 +102,6 @@ class Loader {
                     cast(object.transform.scale)
                 ));
             }
-
-            // load cameras!
-            if(object.camera != null && file.cameras != null) {
-                for(camera in file.cameras) {
-                    if(camera.name == object.camera) {
-                        var cam:mammoth.components.Camera = new mammoth.components.Camera();
-                        cam.setNearFar(camera.near, camera.far);
-                        cam.setClearColour(mammoth.utilities.Colour.Black);
-                        cam.setProjection(switch(camera.type) {
-                            case mammoth.loader.Camera.CameraType.Orthographic:
-                                mammoth.components.Camera.ProjectionMode.Orthographic(camera.ortho_size);
-                            case mammoth.loader.Camera.CameraType.Perspective:
-                                mammoth.components.Camera.ProjectionMode.Perspective(camera.fov);
-                        });
-                        cam.setViewport(new Vec2(0, 0), new Vec2(1, 1));
-
-                        Log.debug('  with camera: ${camera.name}');
-                        entity.add(cam);
-                    }
-                }
-            }
-
-            // load lights!
-            if(object.light != null && file.lights != null) {
-                for(light in file.lights) {
-                    if(light.name == object.light) {
-                        entity.add(switch(light.type) {
-                            case mammoth.loader.Light.LightType.Directional: {
-                                var dirLight:DirectionalLight = new DirectionalLight();
-                                dirLight.setColour(mammoth.utilities.Colour.fromVec4(cast(light.colour)));
-                                dirLight;
-                            }
-                            case mammoth.loader.Light.LightType.Point: {
-                                var pointLight:PointLight = new PointLight();
-                                pointLight.setColour(mammoth.utilities.Colour.fromVec4(cast(light.colour)));
-                                pointLight.setDistance(light.distance);
-                                pointLight;
-                            }
-                        });
-
-                        Log.debug('  with light: ${light.name}');
-                    }
-                }
-            }
-
-            // load meshes!
-            if(object.mesh != null && file.meshes != null) {
-                for(mesh in file.meshes) {
-                    if(mesh.name == object.mesh) {
-                        // TODO
-                        Log.debug('  with mesh: ${mesh.name}');
-                    }
-                }
-            }
         }
-    }
-
-    private static function parseFloatArrayURI<T>(uri:String):Array<Float> {
-        if(!uri.startsWith('data:text/plain;base64,') {
-            return new Array<Float>();
-        }
-
-        var data:Bytes = Base64.decode(uri.substr('data:text/plain;base64,'.length));
-        var arr:haxe.io.Float32Array = haxe.io.Float32Array.fromBytes(data);
-        
     }
 }
