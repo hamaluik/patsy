@@ -24,7 +24,11 @@ import mammoth.defaults.StandardShader;
 import mammoth.defaults.StandardShader.StandardAttributes;
 import mammoth.defaults.StandardShader.StandardUniforms;
 
+import haxe.io.Bytes;
+import haxe.crypto.Base64;
 import haxe.ds.StringMap;
+
+using StringTools;
 
 class Loader {
     private function new(){}
@@ -74,9 +78,7 @@ class Loader {
             var shader:StandardShader = new StandardShader();
 
             if(shad.unlit != null) {
-                if(shad.textures.length > 0) {
-                    shader.setUniform(StandardUniforms.Texture);
-                }
+                // TODO
             }
             else if(shad.diffuse != null) {
                 shader.setUniform(StandardUniforms.AmbientColour);
@@ -88,6 +90,17 @@ class Loader {
             }
 
             shaders.set(shad.name, shader);
+        }
+
+        // load meshes
+        var meshes:StringMap<mammoth.render.Mesh> = new StringMap<mammoth.render.Mesh>();
+        for(me in file.meshes) {
+            var mesh:mammoth.render.Mesh = new mammoth.render.Mesh(me.name, Mammoth.graphics, me.vlayout);
+
+            mesh.setVertexData(parseFloatArrayURI(me.vertices));
+            mesh.setIndexData(parseIntArrayURI(me.indices));
+
+            meshes.set(me.name, mesh);
         }
         
         // load actual objects
@@ -103,5 +116,35 @@ class Loader {
                 ));
             }
         }
+    }
+
+    private static function parseFloatArrayURI(uri:String):Array<Float> {
+        if(!uri.startsWith('data:text/plain;base64,')) {
+            return new Array<Float>();
+        }
+
+        var data:Bytes = Base64.decode(uri.substr('data:text/plain;base64,'.length));
+        var arr:haxe.io.Float32Array = haxe.io.Float32Array.fromBytes(data);
+
+        var ret:Array<Float> = new Array<Float>();
+        for(i in 0...arr.length) {
+            ret.push(arr.get(i));
+        }
+        return ret;
+    }
+
+    private static function parseIntArrayURI(uri:String):Array<Int> {
+        if(!uri.startsWith('data:text/plain;base64,')) {
+            return new Array<Int>();
+        }
+
+        var data:Bytes = Base64.decode(uri.substr('data:text/plain;base64,'.length));
+        var arr:haxe.io.Int32Array = haxe.io.Int32Array.fromBytes(data);
+
+        var ret:Array<Int> = new Array<Int>();
+        for(i in 0...arr.length) {
+            ret.push(arr.get(i));
+        }
+        return ret;
     }
 }

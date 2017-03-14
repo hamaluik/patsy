@@ -9,7 +9,14 @@
             "type": "perspective"
         }
     ],
-    "images": [],
+    "images": [
+        {
+            "height": 1024,
+            "name": "UV Grid",
+            "uri": "",
+            "width": 1024
+        }
+    ],
     "lights": [
         {
             "colour": [
@@ -17,38 +24,18 @@
                 1.0,
                 1.0
             ],
-            "name": "Sun",
+            "name": "SunLight",
             "type": "directional"
-        }
-    ],
-    "shaders": [
-        {
-            "diffuse": {
-                "ambient": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "colour": [
-                    0.14581455290317535,
-                    0.64000004529953,
-                    0.1044430360198021,
-                    1.0
-                ]
-            },
-            "name": "Cube",
-            "textures": {}
         }
     ],
     "meshes": [
         {
-            "indices": "data:text/plain;base64,AQAAAAMAAAAAAAAABwAAAAUAAAAEAAAABAAAAAEAAAAAAAAABQAAAAIAAAABAAAAAgAAAAcAAAADAAAAAAAAAAcAAAAEAAAAAQAAAAIAAAADAAAABwAAAAYAAAAFAAAABAAAAAUAAAABAAAABQAAAAYAAAACAAAAAgAAAAYAAAAHAAAAAAAAAAMAAAAHAAAA",
-            "name": "Cube",
-            "vertices": "data:text/plain;base64,AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/+v9/vwMAgD8AAIC/KM0TvyjNEz8ozRO/AACAP///fz8AAIC/KM0TPyjNEz8ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/BACAP/f/fz8AAIA/KM0TPyjNEz8ozRM/BACAP/f/fz8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AACAP///fz8AAIC/KM0TPyjNEz8ozRO/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/+v9/vwMAgD8AAIC/KM0TvyjNEz8ozRO/AACAP///fz8AAIC/KM0TPyjNEz8ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/BACAP/f/fz8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO/+v9/vwMAgD8AAIC/KM0TvyjNEz8ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/AwCAv/r/f78AAIA/KM0TvyjNE78ozRM/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/BACAP/f/fz8AAIA/KM0TPyjNEz8ozRM/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/AwCAv/r/f78AAIA/KM0TvyjNE78ozRM/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO/AwCAv/r/f78AAIA/KM0TvyjNE78ozRM///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAP///fz8AAIC/KM0TPyjNEz8ozRO/+v9/vwMAgD8AAIC/KM0TvyjNEz8ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/",
+            "indices": "data:text/plain;base64,AQAAAAcAAAAFAAAABAAAAAEAAAAFAAAAAAAAAAMAAAABAAAABAAAAAIAAAAAAAAAAgAAAAcAAAADAAAABgAAAAUAAAAHAAAAAQAAAAMAAAAHAAAABAAAAAAAAAABAAAAAAAAAAIAAAADAAAABAAAAAYAAAACAAAAAgAAAAYAAAAHAAAABgAAAAQAAAAFAAAA",
+            "name": "CubeMesh",
+            "vertices": "data:text/plain;base64,AACAPwAAgD8AAIC/KM0TPyjNEz8ozRO/AACAvwAAgL8AAIC/KM0TvyjNE78ozRO/AACAvwAAgD8AAIC/KM0TvyjNEz8ozRO/AACAvwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAPwAAgD8AAIC/KM0TPyjNEz8ozRO/AACAvwAAgD8AAIC/KM0TvyjNEz8ozRO/AACAPwAAgD8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AACAPwAAgD8AAIC/KM0TPyjNEz8ozRO/AACAvwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAPwAAgL8AAIA/KM0TPyjNE78ozRM/AACAPwAAgD8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgL8AAIA/KM0TPyjNE78ozRM/AACAvwAAgL8AAIC/KM0TvyjNE78ozRO/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AACAvwAAgL8AAIA/KM0TvyjNE78ozRM/AACAvwAAgD8AAIC/KM0TvyjNEz8ozRO/AACAvwAAgL8AAIC/KM0TvyjNE78ozRO/AACAPwAAgD8AAIC/KM0TPyjNEz8ozRO/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AACAvwAAgL8AAIC/KM0TvyjNE78ozRO/AACAvwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAPwAAgD8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgD8AAIC/KM0TPyjNEz8ozRO/AACAPwAAgD8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgL8AAIA/KM0TPyjNE78ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AACAvwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAvwAAgL8AAIA/KM0TvyjNE78ozRM/AACAPwAAgL8AAIA/KM0TPyjNE78ozRM/AACAPwAAgL8AAIA/KM0TPyjNE78ozRM/AACAvwAAgL8AAIA/KM0TvyjNE78ozRM/AACAvwAAgL8AAIC/KM0TvyjNE78ozRO/AACAvwAAgL8AAIA/KM0TvyjNE78ozRM/AACAvwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAvwAAgD8AAIC/KM0TvyjNEz8ozRO/",
             "vlayout": [
-                "pos",
-                "norm"
+                "position",
+                "normal"
             ]
         }
     ],
@@ -74,14 +61,14 @@
                     1.0
                 ],
                 "translation": [
-                    7.481131553649902,
-                    -6.5076398849487305,
-                    5.34366512298584
+                    8.865304946899414,
+                    -8.945302963256836,
+                    7.321406364440918
                 ]
             }
         },
         {
-            "mesh": "Cube",
+            "mesh": "CubeMesh",
             "name": "Cube",
             "transform": {
                 "rotation": [
@@ -103,7 +90,7 @@
             }
         },
         {
-            "light": "Sun",
+            "light": "SunLight",
             "name": "Sun",
             "transform": {
                 "rotation": [
@@ -118,17 +105,32 @@
                     1.0
                 ],
                 "translation": [
-                    3.0012269020080566,
-                    1.5111247301101685,
-                    6.259036540985107
+                    0.0,
+                    0.0,
+                    5.380177021026611
                 ]
             }
         }
     ],
-    "textures": [
+    "shaders": [
         {
-            "name": "Tex",
-            "type": "none"
+            "diffuse": {
+                "ambient": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "colour": [
+                    0.64000004529953,
+                    0.0,
+                    0.031621165573596954,
+                    1.0
+                ]
+            },
+            "name": "Red",
+            "textures": []
         }
-    ]
+    ],
+    "textures": []
 }
