@@ -9,14 +9,7 @@
             "type": "perspective"
         }
     ],
-    "images": [
-        {
-            "height": 1024,
-            "name": "UV Grid",
-            "uri": "",
-            "width": 1024
-        }
-    ],
+    "images": [],
     "lights": [
         {
             "colour": [
@@ -68,8 +61,11 @@
             }
         },
         {
-            "mesh": "CubeMesh",
             "name": "Cube",
+            "render": {
+                "mesh": "CubeMesh",
+                "shader": "Red"
+            },
             "transform": {
                 "rotation": [
                     0.0,

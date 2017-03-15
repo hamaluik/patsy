@@ -30,6 +30,11 @@ typedef Transform = {
     var scale:Array<Float>;
 }
 
+typedef Render = {
+    var mesh:String;
+    @:optional var shader:String;
+}
+
 typedef Object = {
     var name:String;
     
@@ -40,10 +45,7 @@ typedef Object = {
      */
     @:optional var components:Dynamic;
 
-    /**
-     *  The name of a mesh used by this object, indicating it is a visual object
-     */
-    @:optional var mesh:String;
+    @:optional var render:Render;
 
     /**
      *  The name of a camera used by this object, indicating it is a camera
