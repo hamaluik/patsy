@@ -20,8 +20,14 @@ import mammoth.components.Camera;
 
 class CameraSystem implements ISystem {
     public function update(transform:Transform, camera:Camera) {
-        if(camera.vDirty || transform.wasDirty)
+        if(camera.vDirty || transform.wasDirty) {
             camera.v = transform.m.clone().invert();
+
+            mammoth.Log.debug('camera model matrix:');
+            mammoth.Log.debug(transform.m);
+            mammoth.Log.debug('camera view matrix:');
+            mammoth.Log.debug(camera.v);
+        }
 
         if(camera.pDirty) {
             var aspect:Float = Mammoth.width / Mammoth.height;
