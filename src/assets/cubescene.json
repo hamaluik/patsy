@@ -9,14 +9,7 @@
             "type": "perspective"
         }
     ],
-    "images": [
-        {
-            "height": 1024,
-            "name": "UV Grid",
-            "uri": "",
-            "width": 1024
-        }
-    ],
+    "images": [],
     "lights": [
         {
             "colour": [
@@ -32,7 +25,7 @@
         {
             "indices": "data:text/plain;base64,AQAAAAcAAAAFAAAABAAAAAEAAAAFAAAAAAAAAAMAAAABAAAABAAAAAIAAAAAAAAAAgAAAAcAAAADAAAABgAAAAUAAAAHAAAAAQAAAAMAAAAHAAAABAAAAAAAAAABAAAAAAAAAAIAAAADAAAABAAAAAYAAAACAAAAAgAAAAYAAAAHAAAABgAAAAQAAAAFAAAA",
             "name": "CubeMesh",
-            "vertices": "data:text/plain;base64,AACAPwAAgD8AAIC/KM0TPyjNEz8ozRO/AACAvwAAgL8AAIC/KM0TvyjNE78ozRO/AACAvwAAgD8AAIC/KM0TvyjNEz8ozRO/AACAvwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAPwAAgD8AAIC/KM0TPyjNEz8ozRO/AACAvwAAgD8AAIC/KM0TvyjNEz8ozRO/AACAPwAAgD8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AACAPwAAgD8AAIC/KM0TPyjNEz8ozRO/AACAvwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAPwAAgL8AAIA/KM0TPyjNE78ozRM/AACAPwAAgD8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgL8AAIA/KM0TPyjNE78ozRM/AACAvwAAgL8AAIC/KM0TvyjNE78ozRO/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AACAvwAAgL8AAIA/KM0TvyjNE78ozRM/AACAvwAAgD8AAIC/KM0TvyjNEz8ozRO/AACAvwAAgL8AAIC/KM0TvyjNE78ozRO/AACAPwAAgD8AAIC/KM0TPyjNEz8ozRO/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AACAvwAAgL8AAIC/KM0TvyjNE78ozRO/AACAvwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAPwAAgD8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgD8AAIC/KM0TPyjNEz8ozRO/AACAPwAAgD8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgL8AAIA/KM0TPyjNE78ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AACAvwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAvwAAgL8AAIA/KM0TvyjNE78ozRM/AACAPwAAgL8AAIA/KM0TPyjNE78ozRM/AACAPwAAgL8AAIA/KM0TPyjNE78ozRM/AACAvwAAgL8AAIA/KM0TvyjNE78ozRM/AACAvwAAgL8AAIC/KM0TvyjNE78ozRO/AACAvwAAgL8AAIA/KM0TvyjNE78ozRM/AACAvwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAvwAAgD8AAIC/KM0TvyjNEz8ozRO/",
+            "vertices": "data:text/plain;base64,AACAPwAAgD8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgD8AAIC/KM0TPyjNEz8ozRO/AACAPwAAgL8AAIA/KM0TPyjNE78ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AACAvwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAvwAAgD8AAIC/KM0TvyjNEz8ozRO/AACAvwAAgL8AAIA/KM0TvyjNE78ozRM/AACAvwAAgL8AAIC/KM0TvyjNE78ozRO/",
             "vlayout": [
                 "position",
                 "normal"
@@ -68,8 +61,11 @@
             }
         },
         {
-            "mesh": "CubeMesh",
             "name": "Cube",
+            "render": {
+                "mesh": "CubeMesh",
+                "shader": "Red"
+            },
             "transform": {
                 "rotation": [
                     0.0,

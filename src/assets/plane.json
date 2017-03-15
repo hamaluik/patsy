@@ -1,0 +1,106 @@
+{
+    "cameras": [],
+    "images": [],
+    "lights": [
+        {
+            "colour": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "name": "Sun",
+            "type": "directional"
+        }
+    ],
+    "meshes": [
+        {
+            "indices": "data:text/plain;base64,AgAAAAAAAAABAAAAAgAAAAEAAAADAAAA",
+            "name": "Plane",
+            "vertices": "data:text/plain;base64,AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAvwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgL8AAAAAAAAAAAAAAAAAAIA/AACAvwAAgL8AAAAAAAAAAAAAAAAAAIA/",
+            "vlayout": [
+                "position",
+                "normal"
+            ]
+        }
+    ],
+    "meta": {
+        "blender": "2.78 (sub 0)",
+        "exporter_version": "0.0.0",
+        "file": "plane_blend"
+    },
+    "objects": [
+        {
+            "name": "Plane",
+            "render": {
+                "mesh": "Plane",
+                "shader": "Material"
+            },
+            "transform": {
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            }
+        },
+        {
+            "light": "Sun",
+            "name": "Sun",
+            "transform": {
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    1.5577198266983032
+                ]
+            }
+        }
+    ],
+    "shaders": [
+        {
+            "diffuse": {
+                "ambient": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "colour": [
+                    0.27449291944503784,
+                    0.6340741515159607,
+                    0.0459035262465477,
+                    1.0
+                ]
+            },
+            "name": "Material",
+            "textures": []
+        }
+    ],
+    "textures": [
+        {
+            "name": "Tex",
+            "type": "none"
+        }
+    ]
+}
