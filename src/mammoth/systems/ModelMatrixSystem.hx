@@ -15,6 +15,7 @@ package mammoth.systems;
 
 import edge.ISystem;
 import glm.GLM;
+import glm.Mat4;
 import mammoth.components.Transform;
 
 class ModelMatrixSystem implements ISystem {

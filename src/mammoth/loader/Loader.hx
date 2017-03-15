@@ -124,11 +124,13 @@ class Loader {
         for(object in file.objects) {
             var entity:Entity = Mammoth.engine.create([]);
             if(object.transform != null) {
-                entity.add(new mammoth.components.Transform(
+                var transform:mammoth.components.Transform = new mammoth.components.Transform(
                     cast(object.transform.translation),
                     cast(object.transform.rotation),
                     cast(object.transform.scale)
-                ));
+                );
+                transform.name = object.name;
+                entity.add(transform);
             }
 
             if(object.render != null && object.render.shader != null) {

@@ -26,7 +26,7 @@ class CameraSystem implements ISystem {
         if(camera.pDirty) {
             var aspect:Float = Mammoth.width / Mammoth.height;
             camera.p = switch (camera.projection) {
-                case ProjectionMode.Perspective(fov): Projection.perspective(fov * Math.PI / 180, aspect, camera.near, camera.far);
+                case ProjectionMode.Perspective(fov): Projection.perspective(fov, aspect, camera.near, camera.far);
                 case ProjectionMode.Orthographic(halfY): {
                     var halfX:Float = aspect * halfY;
                     Projection.ortho(-halfX, halfX, -halfY, halfY, camera.near, camera.far);
@@ -35,7 +35,7 @@ class CameraSystem implements ISystem {
         }
 
         if(camera.vDirty || camera.pDirty) {
-            camera.vp = camera.p * camera.v;
+            camera.vp = camera.v * camera.p;
             camera.vDirty = false;
             camera.pDirty = false;
         }

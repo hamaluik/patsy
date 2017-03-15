@@ -22,6 +22,7 @@ class Transform implements IComponent {
 	public var dirty:Bool = true;
 	public var wasDirty:Bool = false;
 
+    public var name:String = '';
 	public var parent:Transform = null;
 	public var position:Vec3 = new Vec3();
 	public var rotation:Quat = new Quat().setIdentity();

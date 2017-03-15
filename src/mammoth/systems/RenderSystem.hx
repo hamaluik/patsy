@@ -24,13 +24,14 @@ import mammoth.GL;
 import mammoth.render.Attribute;
 import mammoth.render.Material;
 import mammoth.render.Mesh;
-import mammoth.render.TUniform;
 import glm.Mat4;
 
 class RenderSystem implements ISystem {
     var objects:View<{ transform:Transform, renderer:MeshRenderer }>;
 
-    public function update(transform:Transform, camera:Camera) {
+    var first:Bool = true;
+
+    public function update(camera:Camera) {
         // calculate the viewport
         var vpX:Int = Std.int(camera.viewportMin.x * Mammoth.width);
         var vpY:Int = Std.int(camera.viewportMin.y * Mammoth.height);
@@ -46,13 +47,20 @@ class RenderSystem implements ISystem {
 
         // render each object!
         for(o in objects) {
-            var mesh:Mesh = o.data.renderer.mesh;
-            var material:Material = o.data.renderer.material;
+            var transform:Transform = o.data.transform;
+            var renderer:MeshRenderer = o.data.renderer;
+            var mesh:Mesh = renderer.mesh;
+            var material:Material = renderer.material;
 
             // TODO: set the MVP uniforms
             if(material.uniforms.exists('MVP')) {
-                var MVP:Mat4 = camera.vp * transform.m;
+                var MVP:Mat4 = transform.m * camera.vp;
                 material.setUniform('MVP', TUniform.Mat4(MVP));
+
+                if(first) {
+                    mammoth.Log.debug('MVP:');
+                    mammoth.Log.debug(MVP);
+                }
             }
             if(material.uniforms.exists('M')) {
                 material.setUniform('M', TUniform.Mat4(transform.m));
@@ -65,6 +73,16 @@ class RenderSystem implements ISystem {
             }
             if(material.uniforms.exists('P')) {
                 material.setUniform('P', TUniform.Mat4(camera.p));
+            }
+
+            if(first) {
+                mammoth.Log.debug('VP:');
+                mammoth.Log.debug(camera.vp);
+                mammoth.Log.debug('V:');
+                mammoth.Log.debug(camera.v);
+                mammoth.Log.debug('P:');
+                mammoth.Log.debug(camera.p);
+                first = false;
             }
             
             // TODO: lighting?
