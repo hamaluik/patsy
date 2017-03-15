@@ -1,6 +1,7 @@
 package mammoth.defaults;
 
 import haxe.EnumFlags;
+import mammoth.utilities.Colour;
 
 enum StandardAttributes {
     Normal;
@@ -19,6 +20,9 @@ class StandardShader {
     private var attributes:EnumFlags<StandardAttributes> = new EnumFlags<StandardAttributes>();
     private var uniforms:EnumFlags<StandardUniforms> = new EnumFlags<StandardUniforms>();
 
+    public var albedoColour:Colour;
+    public var ambientColour:Colour;
+
     public var vertex(get, null):String = "";
     public function get_vertex():String {
         if(!built) build();
@@ -34,7 +38,15 @@ class StandardShader {
     private static var vertexStandard:String = mammoth.macros.StandardShader.source("vert");
     private static var fragmentStandard:String = mammoth.macros.StandardShader.source("frag");
 
-    public function new() {}
+    public function new(?origin:StandardShader) {
+        if(origin == null) return;
+
+        attributes = new EnumFlags<StandardAttributes>(origin.attributes.toInt());
+        uniforms = new EnumFlags<StandardUniforms>(origin.uniforms.toInt());
+
+        albedoColour = origin.albedoColour;
+        ambientColour = origin.ambientColour;
+    }
 
     private function build():Void {
         var prepends:Array<String> = new Array<String>();
