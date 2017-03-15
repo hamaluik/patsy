@@ -16,6 +16,7 @@ package mammoth.loader;
 import mammoth.Log;
 import edge.Entity;
 import glm.Vec2;
+import glm.Mat4;
 
 import mammoth.Mammoth;
 import mammoth.components.DirectionalLight;
@@ -189,7 +190,13 @@ class Loader {
                 if(material.standardShader.hasUniform(StandardUniforms.AmbientColour)) {
                     material.setUniform('ambientColour', TUniform.RGB(material.standardShader.ambientColour));
                 }
-                // TODO..
+
+                material.setUniform('MVP', TUniform.Mat4(Mat4.identity()));
+                if(material.standardShader.hasAttribute(StandardAttributes.Normal)) {
+                    material.setUniform('M', TUniform.Mat4(Mat4.identity()));
+                }
+                
+                // TODO..?
 
                 // apply the material
                 renderer.setMaterial(material);
