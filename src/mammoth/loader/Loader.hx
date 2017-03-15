@@ -16,13 +16,17 @@ package mammoth.loader;
 import mammoth.Log;
 import edge.Entity;
 import glm.Vec2;
+import glm.Mat4;
 
 import mammoth.Mammoth;
 import mammoth.components.DirectionalLight;
 import mammoth.components.PointLight;
+import mammoth.components.MeshRenderer;
 import mammoth.defaults.StandardShader;
 import mammoth.defaults.StandardShader.StandardAttributes;
 import mammoth.defaults.StandardShader.StandardUniforms;
+import mammoth.render.Attribute;
+import mammoth.render.TAttribute;
 
 import haxe.io.Bytes;
 import haxe.crypto.Base64;
@@ -32,6 +36,16 @@ using StringTools;
 
 class Loader {
     private function new(){}
+
+    private static function toColour(colour:Colour):mammoth.utilities.Colour {
+        var c:mammoth.utilities.Colour = new mammoth.utilities.Colour();
+        c.r = colour[0];
+        c.g = colour[1];
+        c.b = colour[2];
+        if(colour.length > 3)
+            c.a = colour[3];
+        return c;
+    }
 
     public static function load(file:MammothFile):Void {
         Log.info('Loading data from ${file.meta.file}..');
@@ -78,11 +92,14 @@ class Loader {
             var shader:StandardShader = new StandardShader();
 
             if(shad.unlit != null) {
-                // TODO
+                shader.albedoColour = toColour(shad.unlit.colour);
             }
             else if(shad.diffuse != null) {
                 shader.setUniform(StandardUniforms.AmbientColour);
                 shader.setUniform(StandardUniforms.DirectionalLights);
+
+                shader.albedoColour = toColour(shad.diffuse.colour);
+                shader.ambientColour = toColour(shad.diffuse.ambient);
             }
 
             if(shad.textures.length > 0) {
@@ -105,15 +122,93 @@ class Loader {
         
         // load actual objects
         for(object in file.objects) {
-            Log.debug("creating entity");
             var entity:Entity = Mammoth.engine.create([]);
             if(object.transform != null) {
-                Log.debug(" with transform");
                 entity.add(new mammoth.components.Transform(
                     cast(object.transform.translation),
                     cast(object.transform.rotation),
                     cast(object.transform.scale)
                 ));
+            }
+
+            if(object.render != null && object.render.shader != null) {
+                var renderer:MeshRenderer = new MeshRenderer()
+                    .setMesh(meshes.get(object.render.mesh));
+
+                // create a material for this renderer
+                var material:mammoth.render.Material = new mammoth.render.Material(
+                    object.render.mesh + "->" + object.render.shader,
+                    Mammoth.graphics
+                );
+                material.setStandardShader(shaders.get(object.render.shader));
+
+                // apply the attributes according to the mesh
+                for(attribute in renderer.mesh.attributeNames) {
+                    switch(attribute) {
+                        case 'position': {};
+                        case 'normal': material.standardShader.setAttribute(StandardAttributes.Normal);
+                        case 'uv': material.standardShader.setAttribute(StandardAttributes.UV);
+                        case 'colour': material.standardShader.setAttribute(StandardAttributes.Colour);
+                        case _: throw new mammoth.debug.Exception('Unknown vertex attribute \'${attribute}\'!', false, 'UnknownAttribute');
+                    }
+                }
+
+                // compile it
+                material.compile();
+
+                // set attributes
+                var offset:Int = 0;
+                var attributes:Array<Attribute> = new Array<Attribute>();
+                for(attribute in renderer.mesh.attributeNames) {
+                    switch(attribute) {
+                        case 'position': {
+                            attributes.push(new Attribute('position', TAttribute.Vec3, 0, offset));
+                            offset += 3 * 4;
+                        };
+                        case 'normal': {
+                            attributes.push(new Attribute('normal', TAttribute.Vec3, 0, offset));
+                            offset += 3 * 4;
+                        };
+                        case 'uv': {
+                            attributes.push(new Attribute('uv', TAttribute.Vec2, 0, offset));
+                            offset += 2 * 4;
+                        };
+                        case 'colour': {
+                            attributes.push(new Attribute('colour', TAttribute.Vec3, 0, offset));
+                            offset += 3 * 4;
+                        };
+                    }
+                }
+                // adjust the stride and apply it to the material
+                for(attribute in attributes) {
+                    attribute.stride = offset;
+                    material.registerAttribute(attribute.name, attribute);
+                }
+
+                // apply the uniforms
+                material.setUniform('albedoColour', TUniform.RGB(material.standardShader.albedoColour));
+                if(material.standardShader.hasUniform(StandardUniforms.AmbientColour)) {
+                    material.setUniform('ambientColour', TUniform.RGB(material.standardShader.ambientColour));
+                }
+
+                material.setUniform('MVP', TUniform.Mat4(Mat4.identity()));
+                if(material.standardShader.hasAttribute(StandardAttributes.Normal)) {
+                    material.setUniform('M', TUniform.Mat4(Mat4.identity()));
+                }
+                
+                // TODO..?
+
+                // apply the material
+                renderer.setMaterial(material);
+                entity.add(renderer);
+            }
+
+            if(object.camera != null) {
+                entity.add(cameras.get(object.camera));
+            }
+
+            if(object.light != null) {
+                entity.add(lights.get(object.light));
             }
         }
     }

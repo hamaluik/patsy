@@ -64,7 +64,7 @@ class Material {
 	}
 
 	public function setStandardShader(shader:StandardShader):Material {
-		standardShader = shader;
+		standardShader = new StandardShader(shader);
 		return this;
 	}
 

@@ -24,6 +24,8 @@ import mammoth.GL;
 import mammoth.render.Attribute;
 import mammoth.render.Material;
 import mammoth.render.Mesh;
+import mammoth.render.TUniform;
+import glm.Mat4;
 
 class RenderSystem implements ISystem {
     var objects:View<{ transform:Transform, renderer:MeshRenderer }>;
@@ -48,6 +50,22 @@ class RenderSystem implements ISystem {
             var material:Material = o.data.renderer.material;
 
             // TODO: set the MVP uniforms
+            if(material.uniforms.exists('MVP')) {
+                var MVP:Mat4 = camera.vp * transform.m;
+                material.setUniform('MVP', TUniform.Mat4(MVP));
+            }
+            if(material.uniforms.exists('M')) {
+                material.setUniform('M', TUniform.Mat4(transform.m));
+            }
+            if(material.uniforms.exists('VP')) {
+                material.setUniform('VP', TUniform.Mat4(camera.vp));
+            }
+            if(material.uniforms.exists('V')) {
+                material.setUniform('V', TUniform.Mat4(camera.v));
+            }
+            if(material.uniforms.exists('P')) {
+                material.setUniform('P', TUniform.Mat4(camera.p));
+            }
             
             // TODO: lighting?
             
