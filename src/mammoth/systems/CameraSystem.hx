@@ -35,7 +35,7 @@ class CameraSystem implements ISystem {
         }
 
         if(camera.vDirty || camera.pDirty) {
-            camera.vp = camera.v * camera.p;
+            camera.vp = camera.p * camera.v;
             camera.vDirty = false;
             camera.pDirty = false;
         }

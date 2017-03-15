@@ -20,22 +20,31 @@
             "distance": 29.999982833862305,
             "name": "Lamp",
             "type": "point"
+        },
+        {
+            "colour": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "name": "Sun",
+            "type": "directional"
         }
     ],
     "meshes": [
         {
-            "indices": "data:text/plain;base64,AQAAAAMAAAAAAAAABwAAAAUAAAAEAAAABAAAAAEAAAAAAAAABQAAAAIAAAABAAAAAgAAAAcAAAADAAAAAAAAAAcAAAAEAAAAAQAAAAIAAAADAAAABwAAAAYAAAAFAAAABAAAAAUAAAABAAAABQAAAAYAAAACAAAAAgAAAAYAAAAHAAAAAAAAAAMAAAAHAAAA",
-            "name": "Cube",
-            "vertices": "data:text/plain;base64,AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/+v9/vwMAgD8AAIC/KM0TvyjNEz8ozRO/AACAP///fz8AAIC/KM0TPyjNEz8ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/BACAP/f/fz8AAIA/KM0TPyjNEz8ozRM/BACAP/f/fz8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AACAP///fz8AAIC/KM0TPyjNEz8ozRO/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/+v9/vwMAgD8AAIC/KM0TvyjNEz8ozRO/AACAP///fz8AAIC/KM0TPyjNEz8ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/BACAP/f/fz8AAIA/KM0TPyjNEz8ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO/+v9/vwMAgD8AAIC/KM0TvyjNEz8ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/AwCAv/r/f78AAIA/KM0TvyjNE78ozRM/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/BACAP/f/fz8AAIA/KM0TPyjNEz8ozRM/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/AwCAv/r/f78AAIA/KM0TvyjNE78ozRM/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO/AwCAv/r/f78AAIA/KM0TvyjNE78ozRM///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/AACAP///fz8AAIC/KM0TPyjNEz8ozRO/+v9/vwMAgD8AAIC/KM0TvyjNEz8ozRO///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/",
+            "indices": "data:text/plain;base64,AQAAAAAAAAACAAAAAQAAAAMAAAAAAAAA",
+            "name": "Plane",
+            "vertices": "data:text/plain;base64,AACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/",
             "vlayout": [
                 "position",
                 "normal"
             ]
         },
         {
-            "indices": "data:text/plain;base64,AAAAAAEAAAACAAAA",
-            "name": "Plane",
-            "vertices": "data:text/plain;base64,AACAvwAAgL8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgL8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/",
+            "indices": "data:text/plain;base64,AQAAAAAAAAACAAAAAQAAAAMAAAAAAAAA",
+            "name": "Plane.001",
+            "vertices": "data:text/plain;base64,AACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/",
             "vlayout": [
                 "position",
                 "normal"
@@ -71,28 +80,6 @@
             }
         },
         {
-            "light": "Lamp",
-            "name": "Lamp",
-            "transform": {
-                "rotation": [
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "translation": [
-                    4.076245307922363,
-                    1.0054539442062378,
-                    5.903861999511719
-                ]
-            }
-        },
-        {
             "name": "Plane",
             "render": {
                 "mesh": "Plane",
@@ -114,6 +101,28 @@
                     0.0,
                     0.0,
                     0.0
+                ]
+            }
+        },
+        {
+            "light": "Sun",
+            "name": "Sun",
+            "transform": {
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    4.589419364929199
                 ]
             }
         }

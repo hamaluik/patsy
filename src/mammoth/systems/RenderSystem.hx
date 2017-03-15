@@ -51,7 +51,7 @@ class RenderSystem implements ISystem {
 
             // TODO: set the MVP uniforms
             if(material.uniforms.exists('MVP')) {
-                var MVP:Mat4 = transform.m * camera.vp;
+                var MVP:Mat4 = camera.vp * transform.m;
                 material.setUniform('MVP', TUniform.Mat4(MVP));
             }
             if(material.uniforms.exists('M')) {

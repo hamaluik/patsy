@@ -24,7 +24,7 @@ class Main {
 
     private static function onReady():Void {
         Log.info("Loading cubescene...");
-        Assets.loadJSON(Assets.asset___cubescene__json)
+        Assets.loadJSON(Assets.asset___trianglescene__json)
             .then(function(data:Dynamic) {
                 mammoth.loader.Loader.load(data);
                 Mammoth.begin();
