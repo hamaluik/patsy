@@ -18,6 +18,8 @@ import edge.View;
 import mammoth.components.MeshRenderer;
 import mammoth.components.Transform;
 import mammoth.components.Camera;
+import mammoth.components.DirectionalLight;
+import mammoth.components.PointLight;
 import mammoth.Mammoth;
 import mammoth.Graphics;
 import mammoth.GL;
@@ -28,6 +30,8 @@ import glm.Mat4;
 
 class RenderSystem implements ISystem {
     var objects:View<{ transform:Transform, renderer:MeshRenderer }>;
+    var directionalLights:View<{ transform:Transform, light:DirectionalLight }>;
+    var pointLights:View<{ transform:Transform, light:PointLight }>;
 
     public function update(camera:Camera) {
         // calculate the viewport
@@ -72,6 +76,23 @@ class RenderSystem implements ISystem {
             }
             
             // TODO: lighting!
+            if(material.uniforms.exists('directionalLights[0].position')) {
+                var i:Int = 0;
+                for(pl in directionalLights) {
+                    // TODO: actually calculate the direction!
+                    material.setUniform('directionalLights[${i}].direction', TUniform.Vec3(pl.data.transform.position));
+                    material.setUniform('directionalLights[${i}].colour', TUniform.RGB(pl.data.light.colour));
+                    i++;
+                }
+            }
+            if(material.uniforms.exists('pointLights[0].position')) {
+                var i:Int = 0;
+                for(pl in pointLights) {
+                    material.setUniform('pointLights[${i}].position', TUniform.Vec3(pl.data.transform.position));
+                    material.setUniform('pointLights[${i}].colour', TUniform.RGB(pl.data.light.colour));
+                    i++;
+                }
+            }
             
             // apply the material and render!
             material.apply();

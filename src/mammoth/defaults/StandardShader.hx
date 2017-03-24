@@ -4,14 +4,13 @@ import haxe.EnumFlags;
 import mammoth.utilities.Colour;
 
 enum StandardAttributes {
-    Normal;
     UV;
     Colour;
 }
 
 enum StandardUniforms {
     DirectionalLights;
-    AmbientColour;
+    PointLights;
     Texture;
 }
 
@@ -51,9 +50,6 @@ class StandardShader {
     private function build():Void {
         var prepends:Array<String> = new Array<String>();
 
-        if(attributes.has(StandardAttributes.Normal)) {
-            prepends.push('#define ATTRIBUTE_NORMAL');
-        }
         if(attributes.has(StandardAttributes.UV)) {
             prepends.push('#define ATTRIBUTE_NORMAL');
         }
@@ -64,8 +60,9 @@ class StandardShader {
             prepends.push('#define UNIFORM_DIRECTIONAL_LIGHTS');
             prepends.push('#define NUMBER_DIRECTIONAL_LIGHTS 1');
         }
-        if(uniforms.has(StandardUniforms.AmbientColour)) {
-            prepends.push('#define UNIFORM_AMBIENT');
+        if(uniforms.has(StandardUniforms.PointLights)) {
+            prepends.push('#define UNIFORM_POINT_LIGHTS');
+            prepends.push('#define NUMBER_POINT_LIGHTS 1');
         }
         if(uniforms.has(StandardUniforms.Texture)) {
             prepends.push('#define UNIFORM_TEXTURE');

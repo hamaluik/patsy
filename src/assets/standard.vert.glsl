@@ -4,9 +4,8 @@ precision mediump float;
 
 // attribute inputs
 attribute vec3 position;
-#ifdef ATTRIBUTE_NORMAL
 attribute vec3 normal;
-#endif
+
 #ifdef ATTRIBUTE_UV
 attribute vec2 uv;
 #endif
@@ -16,9 +15,7 @@ attribute vec3 colour;
 
 // camera uniforms
 uniform mat4 MVP;
-#ifdef ATTRIBUTE_NORMAL
 uniform mat4 M;
-#endif
 
 // lights
 #ifdef UNIFORM_DIRECTIONAL_LIGHTS
@@ -28,12 +25,17 @@ struct SDirectionalLight {
 };
 uniform SDirectionalLight directionalLights[NUMBER_DIRECTIONAL_LIGHTS];
 #endif
+#ifdef UNIFORM_POINT_LIGHTS
+struct SPointLight {
+    vec3 position;
+    vec3 colour;
+};
+uniform SPointLight pointLights[NUMBER_POINT_LIGHTS];
+#endif
 
 // material uniforms
 uniform vec3 albedoColour;
-#ifdef UNIFORM_AMBIENT
 uniform vec3 ambientColour;
-#endif
 
 // outputs
 varying vec3 v_colour;
@@ -42,29 +44,32 @@ varying vec2 v_uv;
 #endif
 
 void main() {
-    // set the camera-space position of the vertex
-	gl_Position = MVP * vec4(position, 1.0);
+    // transform position to world space
+    vec3 worldPosition = (M * vec4(position, 1.0)).xyz;
 
-    #ifdef ATTRIBUTE_NORMAL
 	// transform normals into world space
 	vec3 worldNormal = (M * vec4(normal, 0.0)).xyz;
-    #endif
 	
-    vec3 colour = albedoColour;
+    vec3 colour = albedoColour * ambientColour;
+
     #ifdef UNIFORM_DIRECTIONAL_LIGHTS
 	// sun diffuse term
 	float dLight0 = clamp(dot(worldNormal, directionalLights[0].direction), 0.0, 1.0);
-    colour *= directionalLights[0].colour * dLight0;
+    colour += directionalLights[0].colour * dLight0 * albedoColour;
     #endif
 
-    #ifdef UNIFORM_AMBIENT
-	// add some ambient
-	colour += albedoColour * ambientColour;
+    #ifdef UNIFORM_POINT_LIGHTS
+    vec3 pLightDir0 = pointLights[0].position - worldPosition;
+    float pDist0 = length(pLightDir0);
+	float pLight0 = clamp(dot(worldNormal, pLightDir0), 0.0, 1.0) / (pDist0 * pDist0);
+    colour += pointLights[0].colour * pLight0 * albedoColour;
     #endif
 
     v_colour = colour;
     #ifdef ATTRIBUTE_UV
-	// interpolate the UV
 	v_uv = uv;
     #endif
+
+    // set the camera-space position of the vertex
+	gl_Position = MVP * vec4(position, 1.0);
 }

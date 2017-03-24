@@ -110,8 +110,8 @@ class Loader {
                 shader.albedoColour = toColour(shad.unlit.colour);
             }
             else if(shad.diffuse != null) {
-                shader.setUniform(StandardUniforms.AmbientColour);
                 shader.setUniform(StandardUniforms.DirectionalLights);
+                shader.setUniform(StandardUniforms.PointLights);
 
                 shader.albedoColour = toColour(shad.diffuse.colour);
                 shader.ambientColour = toColour(shad.diffuse.ambient);
@@ -162,7 +162,7 @@ class Loader {
                 for(attribute in renderer.mesh.attributeNames) {
                     switch(attribute) {
                         case 'position': {};
-                        case 'normal': material.standardShader.setAttribute(StandardAttributes.Normal);
+                        case 'normal': {};
                         case 'uv': material.standardShader.setAttribute(StandardAttributes.UV);
                         case 'colour': material.standardShader.setAttribute(StandardAttributes.Colour);
                         case _: throw new mammoth.debug.Exception('Unknown vertex attribute \'${attribute}\'!', false, 'UnknownAttribute');
@@ -203,13 +203,19 @@ class Loader {
 
                 // apply the uniforms
                 material.setUniform('albedoColour', TUniform.RGB(material.standardShader.albedoColour));
-                if(material.standardShader.hasUniform(StandardUniforms.AmbientColour)) {
-                    material.setUniform('ambientColour', TUniform.RGB(material.standardShader.ambientColour));
-                }
+                material.setUniform('ambientColour', TUniform.RGB(material.standardShader.ambientColour));
 
                 material.setUniform('MVP', TUniform.Mat4(Mat4.identity(new Mat4())));
-                if(material.standardShader.hasAttribute(StandardAttributes.Normal)) {
-                    material.setUniform('M', TUniform.Mat4(Mat4.identity(new Mat4())));
+                material.setUniform('M', TUniform.Mat4(Mat4.identity(new Mat4())));
+
+                // set 'empty' light uniforms
+                if(material.standardShader.hasUniform(StandardUniforms.DirectionalLights)) {
+                    material.setUniform('directionalLights[0].direction', TUniform.Vec3(new Vec3()));
+                    material.setUniform('directionalLights[0].colour', TUniform.RGB(mammoth.utilities.Colours.Black));
+                }
+                if(material.standardShader.hasUniform(StandardUniforms.PointLights)) {
+                    material.setUniform('pointLights[0].position', TUniform.Vec3(new Vec3()));
+                    material.setUniform('pointLights[0].colour', TUniform.RGB(mammoth.utilities.Colours.Black));
                 }
                 
                 // TODO..?
