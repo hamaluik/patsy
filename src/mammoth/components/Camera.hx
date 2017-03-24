@@ -17,6 +17,7 @@ import edge.IComponent;
 import glm.Mat4;
 import glm.Vec2;
 import mammoth.utilities.Colour;
+import mammoth.utilities.Colours;
 
 enum ProjectionMode {
     Orthographic(size:Float);
@@ -32,7 +33,7 @@ class Camera implements IComponent {
     public var projection:ProjectionMode = ProjectionMode.Perspective(60);
     public var viewportMin:Vec2 = new Vec2(0, 0);
     public var viewportMax:Vec2 = new Vec2(1, 1);
-    public var clearColour:Colour = Colour.Black;
+    public var clearColour:Colour = Colours.Black;
 
     public var v:Mat4 = new Mat4(1.0);
     public var p:Mat4 = new Mat4(1.0);

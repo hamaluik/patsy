@@ -23,10 +23,11 @@ class Main {
     }
 
     private static function onReady():Void {
-        Log.info("Loading cubescene...");
-        Assets.loadJSON(Assets.asset___cubescene__json)
+        Log.info("Loading...");
+        Assets.loadJSON(Assets.asset___pyramid__json)
             .then(function(data:Dynamic) {
                 mammoth.loader.Loader.load(data);
+                Log.info("Done!");
                 Mammoth.begin();
             })
             .catchError(function(e:Dynamic) {

@@ -14,28 +14,30 @@
 package mammoth.systems;
 
 import edge.ISystem;
-import glm.Projection;
 import mammoth.components.Transform;
 import mammoth.components.Camera;
+import glm.GLM;
+import glm.Mat4;
+
+using glm.Mat4;
 
 class CameraSystem implements ISystem {
     public function update(transform:Transform, camera:Camera) {
         if(camera.vDirty || transform.wasDirty) {
-            camera.v = transform.m.clone().invert();
+            camera.v = transform.m.copy(new Mat4());
+            camera.v.invert(camera.v);
 
-            mammoth.Log.debug('camera model matrix:');
-            mammoth.Log.debug(transform.m.toString());
-            mammoth.Log.debug('camera view matrix:');
-            mammoth.Log.debug(camera.v);
+            mammoth.Log.debug('camera model matrix:\n' + transform.m.toString());
+            mammoth.Log.debug('camera view matrix:\n' + camera.v.toString());
         }
 
         if(camera.pDirty) {
             var aspect:Float = Mammoth.width / Mammoth.height;
             camera.p = switch (camera.projection) {
-                case ProjectionMode.Perspective(fov): Projection.perspective(fov, aspect, camera.near, camera.far);
+                case ProjectionMode.Perspective(fov): GLM.perspective(fov, aspect, camera.near, camera.far, new Mat4());
                 case ProjectionMode.Orthographic(halfY): {
                     var halfX:Float = aspect * halfY;
-                    Projection.ortho(-halfX, halfX, -halfY, halfY, camera.near, camera.far);
+                    GLM.orthographic(-halfX, halfX, -halfY, halfY, camera.near, camera.far, new Mat4());
                 }
             };
         }

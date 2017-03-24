@@ -15,9 +15,10 @@ package mammoth.components;
 
 import edge.IComponent;
 import mammoth.utilities.Colour;
+import mammoth.utilities.Colours;
 
 class PointLight implements IComponent {
-    public var colour:Colour = Colour.White;
+    public var colour:Colour = Colours.White;
     public var distance:Float = 25;
 
     public function new() {}

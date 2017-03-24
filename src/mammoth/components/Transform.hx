@@ -25,10 +25,14 @@ class Transform implements IComponent {
     public var name:String = '';
 	public var parent:Transform = null;
 	public var position:Vec3 = new Vec3();
-	public var rotation:Quat = new Quat().setIdentity();
+	public var rotation:Quat = Quat.identity(new Quat());
 	public var scale:Vec3 = new Vec3(1, 1, 1);
     
-    public var m:Mat4 = Mat4.identity();
+    public var m:Mat4 = Mat4.identity(new Mat4());
+
+    public var m_position:Mat4 = Mat4.identity(new Mat4());
+    public var m_rotation:Mat4 = Mat4.identity(new Mat4());
+    public var m_scale:Mat4 = Mat4.identity(new Mat4());
 
     public function new(?position:Vec3, ?rotation:Quat, ?scale:Vec3, ?parent:Transform) {
     	if(position != null) this.position = position;

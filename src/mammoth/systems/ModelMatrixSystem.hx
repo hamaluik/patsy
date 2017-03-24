@@ -24,16 +24,17 @@ class ModelMatrixSystem implements ISystem {
         if(!transform.dirty)
             return;
 
-        transform.m = GLM.translate(
-            GLM.rotation(
-                GLM.scale(transform.scale),
-                transform.rotation
-            ),
-            transform.position);
+        GLM.translate(transform.position.x, transform.position.y, transform.position.z, transform.m_position);
+        // TODO: rotation
+        GLM.scale(transform.scale.x, transform.scale.y, transform.scale.z, transform.m_scale);
+
+        // multiply them together for the full modelview!
+        Mat4.multMat(transform.m_rotation, transform.m_scale, transform.m);
+        Mat4.multMat(transform.m_position, transform.m, transform.m);
 
         if(transform.parent != null) {
             calculateModelMatrix(transform.parent);
-            transform.m = transform.parent.m * transform.m;
+            Mat4.multMat(transform.parent.m, transform.m, transform.m);
         }
 
         transform.dirty = false;

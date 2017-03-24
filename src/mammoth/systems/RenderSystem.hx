@@ -58,8 +58,7 @@ class RenderSystem implements ISystem {
                 material.setUniform('MVP', TUniform.Mat4(MVP));
 
                 if(first) {
-                    mammoth.Log.debug('MVP:');
-                    mammoth.Log.debug(MVP);
+                    mammoth.Log.debug('MVP:\n' + MVP.toString());
                 }
             }
             if(material.uniforms.exists('M')) {
@@ -76,12 +75,9 @@ class RenderSystem implements ISystem {
             }
 
             if(first) {
-                mammoth.Log.debug('VP:');
-                mammoth.Log.debug(camera.vp);
-                mammoth.Log.debug('V:');
-                mammoth.Log.debug(camera.v);
-                mammoth.Log.debug('P:');
-                mammoth.Log.debug(camera.p);
+                mammoth.Log.debug('VP:\n' + camera.vp.toString());
+                mammoth.Log.debug('V:\n' + camera.v.toString());
+                mammoth.Log.debug('P:\n' + camera.p.toString());
                 first = false;
             }
             

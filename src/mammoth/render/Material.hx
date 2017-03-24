@@ -211,7 +211,7 @@ class Material {
 						case Vec2(v): context.uniform2f(location, v.x, v.y);
 						case Vec3(v): context.uniform3f(location, v.x, v.y, v.z);
 						case Vec4(v): context.uniform4f(location, v.x, v.y, v.z, v.w);
-						case Mat4(m): context.uniformMatrix4fv(location, false, m.toArrayRowMajor());
+						case Mat4(m): context.uniformMatrix4fv(location, false, cast(m));
 						case RGB(c): context.uniform3f(location, c.r, c.g, c.b);
 						case RGBA(c): context.uniform4f(location, c.r, c.g, c.b, c.a);
 						case _: throw 'Unhandled uniform type ${uniform.value}!';

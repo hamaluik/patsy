@@ -51,11 +51,11 @@ class Loader {
         Log.info('Loading data from ${file.meta.file}..');
 
         // load cameras
-        var cameras:StringMap<mammoth.components.Camera> = new StringMap<mammoth.components.Camera>();
+        /*var cameras:StringMap<mammoth.components.Camera> = new StringMap<mammoth.components.Camera>();
         for(camera in file.cameras) {
             var cam:mammoth.components.Camera = new mammoth.components.Camera();
             cam.setNearFar(camera.near, camera.far);
-            cam.setClearColour(mammoth.utilities.Colour.Black);
+            cam.setClearColour(mammoth.utilities.Colours.Black);
             cam.setProjection(switch(camera.type) {
                 case mammoth.loader.Camera.CameraType.Orthographic:
                     mammoth.components.Camera.ProjectionMode.Orthographic(camera.ortho_size);
@@ -65,7 +65,15 @@ class Loader {
             cam.setViewport(new Vec2(0, 0), new Vec2(1, 1));
 
             cameras.set(camera.name, cam);
-        }
+        }*/
+        var camT:mammoth.components.Transform = new mammoth.components.Transform();
+        camT.setPosition(0, 0, -5);
+        var cam:mammoth.components.Camera = new mammoth.components.Camera();
+        cam.setNearFar(0.1, 100);
+        cam.setProjection(ProjectionMode.Perspective(45 * Math.PI / 180));
+        cam.setViewport(new Vec2(0, 0), new Vec2(1, 1));
+        cam.setClearColour(new mammoth.utilities.Colour(0.25, 0.25, 0.25, 1));
+        var camEntity:Entity = Mammoth.engine.create([camT, cam]);
 
         // load lights
         var lights:StringMap<edge.IComponent> = new StringMap<edge.IComponent>();
@@ -73,12 +81,16 @@ class Loader {
             lights.set(light.name, switch(light.type) {
                 case mammoth.loader.Light.LightType.Directional: {
                     var dirLight:DirectionalLight = new DirectionalLight();
-                    dirLight.setColour(mammoth.utilities.Colour.fromVec4(cast(light.colour)));
+                    dirLight.setColour(new mammoth.utilities.Colour(
+                        light.colour[0], light.colour[1], light.colour[2], light.colour[3]
+                    ));
                     dirLight;
                 }
                 case mammoth.loader.Light.LightType.Point: {
                     var pointLight:PointLight = new PointLight();
-                    pointLight.setColour(mammoth.utilities.Colour.fromVec4(cast(light.colour)));
+                    pointLight.setColour(new mammoth.utilities.Colour(
+                        light.colour[0], light.colour[1], light.colour[2], light.colour[3]
+                    ));
                     pointLight.setDistance(light.distance);
                     pointLight;
                 }
@@ -193,9 +205,9 @@ class Loader {
                     material.setUniform('ambientColour', TUniform.RGB(material.standardShader.ambientColour));
                 }
 
-                material.setUniform('MVP', TUniform.Mat4(Mat4.identity()));
+                material.setUniform('MVP', TUniform.Mat4(Mat4.identity(new Mat4())));
                 if(material.standardShader.hasAttribute(StandardAttributes.Normal)) {
-                    material.setUniform('M', TUniform.Mat4(Mat4.identity()));
+                    material.setUniform('M', TUniform.Mat4(Mat4.identity(new Mat4())));
                 }
                 
                 // TODO..?
@@ -205,9 +217,9 @@ class Loader {
                 entity.add(renderer);
             }
 
-            if(object.camera != null) {
+            /*if(object.camera != null) {
                 entity.add(cameras.get(object.camera));
-            }
+            }*/
 
             if(object.light != null) {
                 entity.add(lights.get(object.light));

@@ -15,9 +15,10 @@ package mammoth.components;
 
 import edge.IComponent;
 import mammoth.utilities.Colour;
+import mammoth.utilities.Colours;
 
 class DirectionalLight implements IComponent {
-	public var colour:Colour = Colour.White;
+	public var colour:Colour = Colours.White;
 
 	public function new() {}
 

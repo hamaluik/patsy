@@ -13,4 +13,7 @@
 */
 package mammoth.utilities;
 
-typedef Colour = glm.Vec4;
+class Colours {
+    public static var Black:Colour = new Colour(0, 0, 0, 1);
+    public static var White:Colour = new Colour(1, 1, 1, 1);
+}

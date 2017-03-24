@@ -1,0 +1,138 @@
+{
+    "cameras": [
+        {
+            "aspect": 1.703595982340029,
+            "far": 100.0,
+            "fov": 0.5033799409866333,
+            "name": "Camera",
+            "near": 0.10000000149011612,
+            "type": "perspective"
+        }
+    ],
+    "images": [],
+    "lights": [
+        {
+            "colour": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "distance": 25.0,
+            "name": "Point",
+            "type": "point"
+        }
+    ],
+    "meshes": [
+        {
+            "indices": "data:text/plain;base64,AAAAAAEAAAACAAAAAgAAAAQAAAADAAAABAAAAAAAAAADAAAAAgAAAAMAAAAAAAAAAgAAAAEAAAAEAAAABAAAAAEAAAAAAAAA",
+            "name": "Cube",
+            "vertices": "data:text/plain;base64,AAAAvwAAAL8AAAC/U6Epv2W1sr5ToSm/AAAAvwAAAL8AAAA/U6Epv2W1sr5ToSk/AAAAAAAAAD8AAAAAAAAAAAAAgD8AAAAAAAAAPwAAAL8AAAC/U6EpP2W1sr5ToSm/AAAAPwAAAL8AAAA/U6EpP2W1sr5ToSk/",
+            "vlayout": [
+                "position",
+                "normal"
+            ]
+        }
+    ],
+    "meta": {
+        "blender": "2.78 (sub 0)",
+        "exporter_version": "0.0.0",
+        "file": "pyramid_blend"
+    },
+    "objects": [
+        {
+            "camera": "Camera",
+            "name": "Camera",
+            "transform": {
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    4.155705451965332
+                ]
+            }
+        },
+        {
+            "name": "Cube",
+            "render": {
+                "mesh": "Cube",
+                "shader": "Material"
+            },
+            "transform": {
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            }
+        },
+        {
+            "light": "Point",
+            "name": "Point",
+            "transform": {
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    1.9210131168365479
+                ]
+            }
+        }
+    ],
+    "shaders": [
+        {
+            "diffuse": {
+                "ambient": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "colour": [
+                    0.64000004529953,
+                    0.64000004529953,
+                    0.64000004529953,
+                    1.0
+                ]
+            },
+            "name": "Material",
+            "textures": []
+        }
+    ],
+    "textures": [
+        {
+            "name": "Tex",
+            "type": "none"
+        }
+    ]
+}
