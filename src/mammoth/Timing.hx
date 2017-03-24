@@ -22,8 +22,8 @@ class Timing {
     private static var lastTime:Float = 0;
     private static var accumulator:Float = 0;
 
-    private static var dt:Float = 1 / 30;
-    private static var alpha:Float = 0;
+    public static var dt(default, null):Float = 1 / 30;
+    public static var alpha(default, null):Float = 0;
 
     private static var onUpdate:Float->Void;
     private static var onRender:Float->Float->Void;

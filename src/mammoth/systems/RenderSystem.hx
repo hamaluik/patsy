@@ -29,8 +29,6 @@ import glm.Mat4;
 class RenderSystem implements ISystem {
     var objects:View<{ transform:Transform, renderer:MeshRenderer }>;
 
-    var first:Bool = true;
-
     public function update(camera:Camera) {
         // calculate the viewport
         var vpX:Int = Std.int(camera.viewportMin.x * Mammoth.width);
@@ -47,14 +45,16 @@ class RenderSystem implements ISystem {
 
         // render each object!
         for(o in objects) {
+            // cache the things we care about
             var transform:Transform = o.data.transform;
             var renderer:MeshRenderer = o.data.renderer;
             var mesh:Mesh = renderer.mesh;
             var material:Material = renderer.material;
 
+            // calculate the MVP for this object
             renderer.MVP = Mat4.multMat(camera.vp, transform.m, renderer.MVP);
 
-            // set the MVP uniforms
+            // set the M, V, P uniforms
             if(material.uniforms.exists('MVP')) {
                 material.setUniform('MVP', TUniform.Mat4(renderer.MVP));
             }
@@ -70,16 +70,8 @@ class RenderSystem implements ISystem {
             if(material.uniforms.exists('P')) {
                 material.setUniform('P', TUniform.Mat4(camera.p));
             }
-
-            if(first) {
-                mammoth.Log.debug('MVP:\n' + renderer.MVP.toString());
-                mammoth.Log.debug('VP:\n' + camera.vp.toString());
-                mammoth.Log.debug('V:\n' + camera.v.toString());
-                mammoth.Log.debug('P:\n' + camera.p.toString());
-                first = false;
-            }
             
-            // TODO: lighting?
+            // TODO: lighting!
             
             // apply the material and render!
             material.apply();
@@ -105,15 +97,11 @@ class RenderSystem implements ISystem {
                     attribute.offset);
             }
 
+            // bind the index buffer to the vertices for triangles
             g.context.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, mesh.indexBuffer);
-            g.context.drawElements(GL.TRIANGLES, mesh.vertexCount, GL.UNSIGNED_SHORT, 0);
 
-            // TODO: ?
-            /*for(attributeName in mesh.attributeNames) {
-                if(!material.attributes.exists(attributeName)) continue;
-                var attribute:Attribute = material.attributes.get(attributeName);
-                g.context.disableVertexAttribArray(attribute.location);
-            }*/
+            // and draw those suckers!
+            g.context.drawElements(GL.TRIANGLES, mesh.vertexCount, GL.UNSIGNED_SHORT, 0);
         }
     }
 }

@@ -31,6 +31,12 @@ class Graphics {
     private var unFullHeight:Int;
     private var fullWindowed:Bool = false;
 
+    private var width(get, never):Float;
+    private inline function get_width():Float return context.canvas.width;
+
+    private var height(get, never):Float;
+    private inline function get_height():Float return context.canvas.height;
+
     private function new() {}
 
     private function init(title:String, width:Int, height:Int) {

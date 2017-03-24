@@ -32,6 +32,9 @@ import haxe.io.Bytes;
 import haxe.crypto.Base64;
 import haxe.ds.StringMap;
 
+import glm.Vec3;
+import glm.Quat;
+
 using StringTools;
 
 class Loader {
@@ -136,11 +139,10 @@ class Loader {
         for(object in file.objects) {
             var entity:Entity = Mammoth.engine.create([]);
             if(object.transform != null) {
-                var transform:mammoth.components.Transform = new mammoth.components.Transform(
-                    cast(object.transform.translation),
-                    cast(object.transform.rotation),
-                    cast(object.transform.scale)
-                );
+                var transform:mammoth.components.Transform = new mammoth.components.Transform();
+                transform.position = cast(object.transform.translation);
+                transform.rotation = cast(object.transform.rotation);
+                transform.scale = cast(object.transform.scale);
                 transform.name = object.name;
                 entity.add(transform);
             }
