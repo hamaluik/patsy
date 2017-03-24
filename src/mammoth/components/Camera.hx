@@ -30,6 +30,7 @@ class Camera implements IComponent {
 
     public var near:Float = 0.1;
     public var far:Float = 100;
+    public var aspect:Float = 16/9;
     public var projection:ProjectionMode = ProjectionMode.Perspective(60);
     public var viewportMin:Vec2 = new Vec2(0, 0);
     public var viewportMax:Vec2 = new Vec2(1, 1);

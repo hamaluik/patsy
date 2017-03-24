@@ -17,9 +17,13 @@ import edge.IComponent;
 import mammoth.render.Material;
 import mammoth.render.Mesh;
 
+import glm.Mat4;
+
 class MeshRenderer implements IComponent {
 	public var material:Material;
 	public var mesh:Mesh;
+
+	public var MVP:Mat4 = Mat4.identity(new Mat4());
 
 	public function new() {}
 

@@ -17,33 +17,35 @@ import edge.ISystem;
 import mammoth.components.Transform;
 import mammoth.components.Camera;
 import glm.GLM;
-import glm.Mat4;
 
 using glm.Mat4;
 
 class CameraSystem implements ISystem {
     public function update(transform:Transform, camera:Camera) {
-        if(camera.vDirty || transform.wasDirty) {
-            camera.v = transform.m.copy(new Mat4());
-            camera.v.invert(camera.v);
 
-            mammoth.Log.debug('camera model matrix:\n' + transform.m.toString());
-            mammoth.Log.debug('camera view matrix:\n' + camera.v.toString());
+        if(camera.vDirty || transform.wasDirty) {
+            camera.v = transform.m.copy(camera.v);
+            camera.v.invert(camera.v);
+        }
+
+        // check for aspect ratio changes
+        var aspect:Float = Mammoth.width / Mammoth.height;
+        if(aspect != camera.aspect) {
+            camera.pDirty = true;
         }
 
         if(camera.pDirty) {
-            var aspect:Float = Mammoth.width / Mammoth.height;
             camera.p = switch (camera.projection) {
-                case ProjectionMode.Perspective(fov): GLM.perspective(fov, aspect, camera.near, camera.far, new Mat4());
+                case ProjectionMode.Perspective(fov): GLM.perspective(fov, aspect, camera.near, camera.far, camera.p);
                 case ProjectionMode.Orthographic(halfY): {
                     var halfX:Float = aspect * halfY;
-                    GLM.orthographic(-halfX, halfX, -halfY, halfY, camera.near, camera.far, new Mat4());
+                    GLM.orthographic(-halfX, halfX, -halfY, halfY, camera.near, camera.far, camera.p);
                 }
             };
         }
 
         if(camera.vDirty || camera.pDirty) {
-            camera.vp = camera.v * camera.p;
+            camera.vp = Mat4.multMat(camera.p, camera.v, camera.vp);
             camera.vDirty = false;
             camera.pDirty = false;
         }
