@@ -24,7 +24,7 @@ class CameraSystem implements ISystem {
             camera.v = transform.m.clone().invert();
 
             mammoth.Log.debug('camera model matrix:');
-            mammoth.Log.debug(transform.m);
+            mammoth.Log.debug(transform.m.toString());
             mammoth.Log.debug('camera view matrix:');
             mammoth.Log.debug(camera.v);
         }
