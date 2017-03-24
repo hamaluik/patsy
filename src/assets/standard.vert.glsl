@@ -29,6 +29,7 @@ uniform SDirectionalLight directionalLights[NUMBER_DIRECTIONAL_LIGHTS];
 struct SPointLight {
     vec3 position;
     vec3 colour;
+    float distance;
 };
 uniform SPointLight pointLights[NUMBER_POINT_LIGHTS];
 #endif
@@ -61,7 +62,7 @@ void main() {
     #ifdef UNIFORM_POINT_LIGHTS
     vec3 pLightDir0 = pointLights[0].position - worldPosition;
     float pDist0 = length(pLightDir0);
-	float pLight0 = clamp(dot(worldNormal, pLightDir0), 0.0, 1.0) / (pDist0 * pDist0);
+	float pLight0 = clamp(dot(worldNormal, pLightDir0), 0.0, 1.0) * pointLights[0].distance / (pDist0 * pDist0);
     colour += pointLights[0].colour * pLight0 * albedoColour;
     #endif
 

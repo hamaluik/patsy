@@ -90,6 +90,7 @@ class RenderSystem implements ISystem {
                 for(pl in pointLights) {
                     material.setUniform('pointLights[${i}].position', TUniform.Vec3(pl.data.transform.position));
                     material.setUniform('pointLights[${i}].colour', TUniform.RGB(pl.data.light.colour));
+                    material.setUniform('pointLights[${i}].distance', TUniform.Float(pl.data.light.distance));
                     i++;
                 }
             }

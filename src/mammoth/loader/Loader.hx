@@ -69,14 +69,6 @@ class Loader {
 
             cameras.set(camera.name, cam);
         }
-        /*var camT:mammoth.components.Transform = new mammoth.components.Transform();
-        camT.setPosition(0, 0, 6);
-        var cam:mammoth.components.Camera = new mammoth.components.Camera();
-        cam.setNearFar(0.1, 100);
-        cam.setProjection(ProjectionMode.Perspective(45 * Math.PI / 180));
-        cam.setViewport(new Vec2(0, 0), new Vec2(1, 1));
-        cam.setClearColour(new mammoth.utilities.Colour(0.25, 0.25, 0.25, 1));
-        Mammoth.engine.create([camT, cam]);*/
 
         // load lights
         var lights:StringMap<edge.IComponent> = new StringMap<edge.IComponent>();
@@ -94,7 +86,7 @@ class Loader {
                     pointLight.setColour(new mammoth.utilities.Colour(
                         light.colour[0], light.colour[1], light.colour[2], light.colour[3]
                     ));
-                    pointLight.setDistance(light.distance);
+                    pointLight.setDistance(Math.sqrt(light.distance));
                     pointLight;
                 }
             });
@@ -216,6 +208,7 @@ class Loader {
                 if(material.standardShader.hasUniform(StandardUniforms.PointLights)) {
                     material.setUniform('pointLights[0].position', TUniform.Vec3(new Vec3()));
                     material.setUniform('pointLights[0].colour', TUniform.RGB(mammoth.utilities.Colours.Black));
+                    material.setUniform('pointLights[0].distance', TUniform.Float(0.0));
                 }
                 
                 // TODO..?
