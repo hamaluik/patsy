@@ -24,7 +24,7 @@ class Main {
 
     private static function onReady():Void {
         Log.info("Loading...");
-        Assets.loadJSON(Assets.asset___pyramid__json)
+        Assets.loadJSON(Assets.asset___monkey__json)
             .then(function(data:Dynamic) {
                 mammoth.loader.Loader.load(data);
                 Log.info("Done!");
@@ -33,8 +33,8 @@ class Main {
                 for(entity in Mammoth.engine.entities()) {
                     var t:mammoth.components.Transform = entity.get(mammoth.components.Transform);
                     if(t != null) {
-                        if(t.name == 'Cube') {
-                            mammoth.Log.info('Adding bounce to "Cube"!');
+                        if(t.name == 'Point') {
+                            mammoth.Log.info('Adding bounce to "Point"!');
                             entity.add(new components.Bounce());
                         }
                     }
