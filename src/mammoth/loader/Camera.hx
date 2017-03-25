@@ -24,6 +24,7 @@ typedef Camera = {
     var type:CameraType;
     var near:Float;
     var far:Float;
+    var clearColour:Colour;
     @:optional var aspect:Float;
     @:optional var fov:Float;
     @:optional var ortho_size:Float;

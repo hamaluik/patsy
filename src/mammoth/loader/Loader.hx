@@ -58,7 +58,10 @@ class Loader {
         for(camera in file.cameras) {
             var cam:mammoth.components.Camera = new mammoth.components.Camera();
             cam.setNearFar(camera.near, camera.far);
-            cam.setClearColour(mammoth.utilities.Colours.Black);
+            cam.setClearColour(new mammoth.utilities.Colour(
+                camera.clearColour[0], camera.clearColour[1],
+                camera.clearColour[2], 1.0
+            ));
             cam.setProjection(switch(camera.type) {
                 case mammoth.loader.Camera.CameraType.Orthographic:
                     mammoth.components.Camera.ProjectionMode.Orthographic(camera.ortho_size);
