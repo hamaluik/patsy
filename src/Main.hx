@@ -24,7 +24,7 @@ class Main {
 
     private static function onReady():Void {
         Log.info("Loading...");
-        Assets.loadJSON(Assets.asset___monkey__json)
+        Assets.loadJSON(Assets.asset___default__json)
             .then(function(data:Dynamic) {
                 mammoth.loader.Loader.load(data);
                 Log.info("Done!");

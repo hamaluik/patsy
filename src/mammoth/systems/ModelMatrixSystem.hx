@@ -26,10 +26,6 @@ class ModelMatrixSystem implements ISystem {
     private var rotation:Quat = new Quat();
     private var scale:Vec3 = new Vec3();
 
-    private var m_position:Mat4 = new Mat4();
-    private var m_rotation:Mat4 = Mat4.identity(new Mat4());
-    private var m_scale:Mat4 = new Mat4();
-
     private function calculateModelMatrix(transform:Transform) {
         transform.wasDirty = false;
         if(!transform.dirty)
@@ -40,15 +36,8 @@ class ModelMatrixSystem implements ISystem {
         Quat.slerp(transform.lastRotation, transform.rotation, Timing.alpha, rotation);
         Vec3.lerp(transform.lastScale, transform.scale, Timing.alpha, scale);
 
-        // calculate the matrices for the transform components
-        GLM.translate(position.x, position.y, position.z, m_position);
-        // TODO: rotation
-        GLM.scale(scale.x, scale.y, scale.z, m_scale);
-
-        // multiply them together for the full modelview!
-        // TODO: order?
-        Mat4.multMat(m_rotation, m_scale, transform.m);
-        Mat4.multMat(m_position, transform.m, transform.m);
+        // calculate the full transformation matrix
+        GLM.transform(position, rotation, scale, transform.m);
 
         if(transform.parent != null) {
             calculateModelMatrix(transform.parent);
