@@ -26,7 +26,11 @@ import mammoth.GL;
 import mammoth.render.Attribute;
 import mammoth.render.Material;
 import mammoth.render.Mesh;
+import glm.Vec3;
+import glm.Vec4;
 import glm.Mat4;
+
+using glm.Mat4;
 
 class RenderSystem implements ISystem {
     var objects:View<{ transform:Transform, renderer:MeshRenderer }>;
@@ -74,14 +78,16 @@ class RenderSystem implements ISystem {
             if(material.uniforms.exists('P')) {
                 material.setUniform('P', TUniform.Mat4(camera.p));
             }
-            
-            // TODO: lighting!
-            if(material.uniforms.exists('directionalLights[0].position')) {
+        
+            if(material.uniforms.exists('directionalLights[0].direction')) {
                 var i:Int = 0;
-                for(pl in directionalLights) {
-                    // TODO: actually calculate the direction!
-                    material.setUniform('directionalLights[${i}].direction', TUniform.Vec3(pl.data.transform.position));
-                    material.setUniform('directionalLights[${i}].colour', TUniform.RGB(pl.data.light.colour));
+                for(dl in directionalLights) {
+                    // calculate the direction
+                    // TODO: calculate this offline somewhere else for efficiency!
+                    var dir:Vec4 = dl.data.transform.m.multVec(new Vec4(0, 0, 1, 1), new Vec4());
+
+                    material.setUniform('directionalLights[${i}].direction', TUniform.Vec3(new Vec3(dir.x, dir.y, dir.z)));
+                    material.setUniform('directionalLights[${i}].colour', TUniform.RGB(dl.data.light.colour));
                     i++;
                 }
             }
@@ -94,6 +100,7 @@ class RenderSystem implements ISystem {
                     i++;
                 }
             }
+            // TODO: spotlights
             
             // apply the material and render!
             material.apply();
