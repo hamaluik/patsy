@@ -52,12 +52,11 @@ void main() {
     colour += pointLights[0].colour * pLight0 * albedoColour;
     #endif
 
-    // gamma?
-    colour = pow(colour, vec3(1.0/2.2));
-
     vec4 outColour = vec4(colour, 1.0);
     #ifdef UNIFORM_TEXTURE
     outColour *= texture2D(texture, v_uv);
     #endif
-    gl_FragColor = outColour;
+
+    // gamma
+    gl_FragColor = vec4(pow(outColour.rgb, vec3(1.0/2.2)), outColour.a);
 }
