@@ -22,7 +22,6 @@ using glm.Mat4;
 
 class CameraSystem implements ISystem {
     public function update(transform:Transform, camera:Camera) {
-
         if(camera.vDirty || transform.wasDirty) {
             camera.v = transform.m.copy(camera.v);
             camera.v.invert(camera.v);
@@ -37,8 +36,9 @@ class CameraSystem implements ISystem {
         if(camera.pDirty) {
             camera.p = switch (camera.projection) {
                 case ProjectionMode.Perspective(fov): GLM.perspective(fov, aspect, camera.near, camera.far, camera.p);
-                case ProjectionMode.Orthographic(halfY): {
-                    var halfX:Float = aspect * halfY;
+                case ProjectionMode.Orthographic(size): {
+                    var halfX:Float = size * 0.5;
+                    var halfY:Float = halfX / aspect;
                     GLM.orthographic(-halfX, halfX, -halfY, halfY, camera.near, camera.far, camera.p);
                 }
             };
