@@ -18,6 +18,9 @@ import mammoth.components.Transform;
 
 class PostTransformSystem implements ISystem {
     public function update(transform:Transform) {
+        // skip any unecessary calculations
+        if(transform.dirty) return;
+
         // check to see if anything changed
         // if it did, the matrix is definitely dirty!
         if(!transform.position.equals(transform.lastPosition)) {
