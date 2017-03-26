@@ -58,10 +58,7 @@ class Loader {
         for(camera in file.cameras) {
             var cam:mammoth.components.Camera = new mammoth.components.Camera();
             cam.setNearFar(camera.near, camera.far);
-            cam.setClearColour(new mammoth.utilities.Colour(
-                camera.clearColour[0], camera.clearColour[1],
-                camera.clearColour[2], 1.0
-            ));
+            cam.setClearColour(toColour(camera.clearColour));
             cam.setProjection(switch(camera.type) {
                 case mammoth.loader.Camera.CameraType.Orthographic:
                     mammoth.components.Camera.ProjectionMode.Orthographic(camera.ortho_size);
@@ -79,16 +76,12 @@ class Loader {
             lights.set(light.name, switch(light.type) {
                 case mammoth.loader.Light.LightType.Directional: {
                     var dirLight:DirectionalLight = new DirectionalLight();
-                    dirLight.setColour(new mammoth.utilities.Colour(
-                        light.colour[0], light.colour[1], light.colour[2], light.colour[3]
-                    ));
+                    dirLight.setColour(toColour(light.colour));
                     dirLight;
                 }
                 case mammoth.loader.Light.LightType.Point: {
                     var pointLight:PointLight = new PointLight();
-                    pointLight.setColour(new mammoth.utilities.Colour(
-                        light.colour[0], light.colour[1], light.colour[2], light.colour[3]
-                    ));
+                    pointLight.setColour(toColour(light.colour));
                     pointLight.setDistance(Math.sqrt(light.distance));
                     pointLight;
                 }
