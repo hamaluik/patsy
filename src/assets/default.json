@@ -22,16 +22,43 @@
                 1.0,
                 1.0
             ],
-            "distance": 29.999982833862305,
-            "name": "Lamp",
+            "distance": 25.0,
+            "name": "Point",
             "type": "point"
+        },
+        {
+            "colour": [
+                1.0,
+                0.9561488628387451,
+                0.7573099136352539
+            ],
+            "name": "Sun",
+            "type": "directional"
         }
     ],
     "meshes": [
         {
-            "indices": "data:text/plain;base64,AQAAAAMAAAAAAAAABwAAAAUAAAAEAAAABAAAAAEAAAAAAAAABQAAAAIAAAABAAAAAgAAAAcAAAADAAAAAAAAAAcAAAAEAAAAAQAAAAIAAAADAAAABwAAAAYAAAAFAAAABAAAAAUAAAABAAAABQAAAAYAAAACAAAAAgAAAAYAAAAHAAAAAAAAAAMAAAAHAAAA",
+            "indices": "data:text/plain;base64,DAAAAAgAAAAKAAAADwAAABAAAAAJAAAAEwAAABQAAAARAAAAFwAAAAsAAAAVAAAABgAAAAAAAAACAAAAAwAAAAUAAAAHAAAADAAAAA4AAAAIAAAADwAAABIAAAAQAAAAEwAAABYAAAAUAAAAFwAAAA0AAAALAAAABgAAAAQAAAAAAAAAAwAAAAEAAAAFAAAA",
             "name": "Cube",
-            "vertices": "data:text/plain;base64,AACAP///fz8AAIC/KM0TPyjNEz8ozRO/AACAPwAAgL8AAIC/KM0TPyjNE78ozRO/AQCAv/3/f78AAIC/KM0TvyjNE78ozRO/+v9/vwMAgD8AAIC/KM0TvyjNEz8ozRO/BACAP/f/fz8AAIA/KM0TPyjNEz8ozRM/9f9/PwUAgL8AAIA/KM0TPyjNE78ozRM/AwCAv/r/f78AAIA/KM0TvyjNE78ozRM///9/vwAAgD8AAIA/KM0TvyjNEz8ozRM/",
+            "vertices": "data:text/plain;base64,AAAAvwAAAL8AAAAAAAAAAAAAAAAAAIC/AAAAvwAAAL8AAIA/AAAAAAAAAAAAAIA/AAAAvwAAAD8AAAAAAAAAAAAAAAAAAIC/AAAAvwAAAD8AAIA/AAAAAAAAAAAAAIA/AAAAPwAAAL8AAAAAAAAAAAAAAAAAAIC/AAAAPwAAAL8AAIA/AAAAAAAAAAAAAIA/AAAAPwAAAD8AAAAAAAAAAAAAAAAAAIC/AAAAPwAAAD8AAIA/AAAAAAAAAAAAAIA/AAAAvwAAAD8AAAAAAACAvwAAAAAAAAAAAAAAvwAAAD8AAAAAAAAAAAAAgD8AAAAAAAAAvwAAAL8AAAAAAACAvwAAAAAAAAAAAAAAvwAAAL8AAAAAAAAAAAAAgL8AAAAAAAAAvwAAAL8AAIA/AACAvwAAAAAAAAAAAAAAvwAAAL8AAIA/AAAAAAAAgL8AAAAAAAAAvwAAAD8AAIA/AACAvwAAAAAAAAAAAAAAvwAAAD8AAIA/AAAAAAAAgD8AAAAAAAAAPwAAAD8AAAAAAAAAAAAAgD8AAAAAAAAAPwAAAD8AAAAAAACAPwAAAAAAAAAAAAAAPwAAAD8AAIA/AAAAAAAAgD8AAAAAAAAAPwAAAD8AAIA/AACAPwAAAAAAAAAAAAAAPwAAAL8AAAAAAACAPwAAAAAAAAAAAAAAPwAAAL8AAAAAAAAAAAAAgL8AAAAAAAAAPwAAAL8AAIA/AACAPwAAAAAAAAAAAAAAPwAAAL8AAIA/AAAAAAAAgL8AAAAA",
+            "vlayout": [
+                "position",
+                "normal"
+            ]
+        },
+        {
+            "indices": "data:text/plain;base64,AQAAAAIAAAAAAAAAAQAAAAMAAAACAAAA",
+            "name": "Plane",
+            "vertices": "data:text/plain;base64,AACgwQAAoMEAAAAAAAAAAAAAAAAAAIA/AACgQQAAoMEAAAAAAAAAAAAAAAAAAIA/AACgwQAAoEEAAAAAAAAAAAAAAAAAAIA/AACgQQAAoEEAAAAAAAAAAAAAAAAAAIA/",
+            "vlayout": [
+                "position",
+                "normal"
+            ]
+        },
+        {
+            "indices": "data:text/plain;base64,AQAAAAIAAAAAAAAAAQAAAAMAAAACAAAA",
+            "name": "Plane.001",
+            "vertices": "data:text/plain;base64,AAAgwQAAIMEAAAAAAAAAAAAAAAAAAIA/AAAgQQAAIMEAAAAAAAAAAAAAAAAAAIA/AAAgwQAAIEEAAAAAAAAAAAAAAAAAAIA/AAAgQQAAIEEAAAAAAAAAAAAAAAAAAIA/",
             "vlayout": [
                 "position",
                 "normal"
@@ -41,7 +68,7 @@
     "meta": {
         "blender": "2.78 (sub 0)",
         "exporter_version": "0.0.0",
-        "file": ""
+        "file": "default_blend"
     },
     "objects": [
         {
@@ -49,10 +76,10 @@
             "name": "Camera",
             "transform": {
                 "rotation": [
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0
+                    0.46979713439941406,
+                    0.23272034525871277,
+                    0.36662694811820984,
+                    0.7685808539390564
                 ],
                 "scale": [
                     1.0,
@@ -60,9 +87,9 @@
                     1.0
                 ],
                 "translation": [
-                    7.481131553649902,
-                    -6.5076398849487305,
-                    5.34366512298584
+                    2.574260711669922,
+                    -2.1140871047973633,
+                    2.0925087928771973
                 ]
             }
         },
@@ -70,7 +97,7 @@
             "name": "Cube",
             "render": {
                 "mesh": "Cube",
-                "shader": "Material"
+                "shader": "Cube"
             },
             "transform": {
                 "rotation": [
@@ -92,8 +119,11 @@
             }
         },
         {
-            "light": "Lamp",
-            "name": "Lamp",
+            "name": "Plane",
+            "render": {
+                "mesh": "Plane.001",
+                "shader": "Plane"
+            },
             "transform": {
                 "rotation": [
                     0.0,
@@ -107,9 +137,31 @@
                     1.0
                 ],
                 "translation": [
-                    4.076245307922363,
-                    1.0054539442062378,
-                    5.903861999511719
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            }
+        },
+        {
+            "light": "Sun",
+            "name": "Sun",
+            "transform": {
+                "rotation": [
+                    0.04850759729743004,
+                    0.39150676131248474,
+                    -0.11298702657222748,
+                    0.9119229316711426
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
                 ]
             }
         }
@@ -118,19 +170,37 @@
         {
             "diffuse": {
                 "ambient": [
-                    0.0,
-                    0.0,
-                    0.0,
+                    0.010504436679184437,
+                    0.012326709926128387,
+                    0.027537774294614792,
                     1.0
                 ],
                 "colour": [
-                    0.1792982518672943,
-                    0.8000000715255737,
-                    0.19734498858451843,
+                    0.5876288414001465,
+                    0.5876288414001465,
+                    0.5876288414001465,
                     1.0
                 ]
             },
-            "name": "Material",
+            "name": "Cube",
+            "textures": []
+        },
+        {
+            "diffuse": {
+                "ambient": [
+                    0.010504436679184437,
+                    0.012326709926128387,
+                    0.027537774294614792,
+                    1.0
+                ],
+                "colour": [
+                    0.044037021696567535,
+                    0.044037021696567535,
+                    0.044037021696567535,
+                    1.0
+                ]
+            },
+            "name": "Plane",
             "textures": []
         }
     ],
