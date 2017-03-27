@@ -22,11 +22,8 @@ import glm.Quat;
 @:allow(mammoth.systems.PreTransformSystem)
 @:allow(mammoth.systems.PostTransformSystem)
 class Transform implements IComponent {
-	public var dirty:Bool = true;
-	public var wasDirty:Bool = false;
-
     public var name:String = '';
-	public var parent:Transform = null;
+	public var parent(default, set):Transform = null;
 
 	public var position(default, set):Vec3 = new Vec3();
 	public var rotation(default, set):Quat = Quat.identity(new Quat());
@@ -40,11 +37,18 @@ class Transform implements IComponent {
 
     public function new() {}
 
+    private inline function set_parent(newParent:Transform):Transform {
+        // don't let us parent ourselves!
+        if(newParent == this) return parent;
+
+        parent = newParent;
+        return parent;
+    }
+
     private inline function set_position(newPosition:Vec3):Vec3 {
         position.x = newPosition.x;
         position.y = newPosition.y;
         position.z = newPosition.z;
-        dirty = true;
         return position;
     }
 
@@ -53,7 +57,6 @@ class Transform implements IComponent {
         rotation.y = rot.y;
         rotation.z = rot.z;
         rotation.w = rot.w;
-        dirty = true;
         return rotation;
     }
 
@@ -61,7 +64,6 @@ class Transform implements IComponent {
         scale.x = newScale.x;
         scale.y = newScale.y;
         scale.z = newScale.z;
-        dirty = true;
         return scale;
     }
 }

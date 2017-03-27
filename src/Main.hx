@@ -33,14 +33,17 @@ class Main {
                 for(entity in Mammoth.engine.entities()) {
                     var t:mammoth.components.Transform = entity.get(mammoth.components.Transform);
                     if(t != null) {
-                        if(t.name == 'Point') {
-                            mammoth.Log.info('Adding bounce to "Point"!');
-                            entity.add(new components.Bounce());
+                        if(t.name == 'CameraRoot') {
+                            mammoth.Log.info('Adding spin to "CameraRoot"!');
+                            var spin:components.Spin = new components.Spin();
+                            spin.angle = 0;
+                            spin.speed = Math.PI / 10;
+                            entity.add(spin);
                         }
                     }
                 }
 
-                Mammoth.updatePhase.add(new systems.BounceSystem());
+                Mammoth.updatePhase.add(new systems.SpinSystem());
 
                 Mammoth.begin();
             })

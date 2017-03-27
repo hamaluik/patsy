@@ -64,7 +64,6 @@ class Mammoth {
 
         // initialize our pre- and post- systems
         preUpdatePhase.add(new mammoth.systems.PreTransformSystem());
-        postUpdatePhase.add(new mammoth.systems.PostTransformSystem());
 
         // initialize our rendering
         renderPhase.add(new mammoth.systems.ModelMatrixSystem());

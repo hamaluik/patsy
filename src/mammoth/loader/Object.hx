@@ -37,6 +37,8 @@ typedef Render = {
 
 typedef Object = {
     var name:String;
+
+    @:optional var children:Array<Object>;
     
     @:optional var transform:Transform;
 

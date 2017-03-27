@@ -26,7 +26,6 @@ enum ProjectionMode {
 
 class Camera implements IComponent {
     public var pDirty:Bool = true;
-    public var vDirty:Bool = true;
 
     public var near:Float = 0.1;
     public var far:Float = 100;

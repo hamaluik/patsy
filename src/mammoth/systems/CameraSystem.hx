@@ -22,10 +22,9 @@ using glm.Mat4;
 
 class CameraSystem implements ISystem {
     public function update(transform:Transform, camera:Camera) {
-        if(camera.vDirty || transform.wasDirty) {
-            camera.v = transform.m.copy(camera.v);
-            camera.v.invert(camera.v);
-        }
+        // calculate the updated model matrix
+        camera.v = transform.m.copy(camera.v);
+        camera.v.invert(camera.v);
 
         // check for aspect ratio changes
         var aspect:Float = Mammoth.width / Mammoth.height;
@@ -42,11 +41,8 @@ class CameraSystem implements ISystem {
                     GLM.orthographic(-halfX, halfX, -halfY, halfY, camera.near, camera.far, camera.p);
                 }
             };
-        }
 
-        if(camera.vDirty || camera.pDirty) {
             camera.vp = Mat4.multMat(camera.p, camera.v, camera.vp);
-            camera.vDirty = false;
             camera.pDirty = false;
         }
     }
