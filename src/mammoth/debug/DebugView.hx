@@ -13,8 +13,8 @@ class DebugView {
     private var context:RenderingContext;
     private var program:Program;
     private var buffer:Buffer;
-    private var image:ImageElement;
-    private var texture:Texture;
+    private var fontImage:ImageElement;
+    private var fontTexture:Texture;
 
     private var positionLoc:Int = 0;
     private var uvLoc:Int = 0;
@@ -64,26 +64,26 @@ class DebugView {
         vpLoc = context.getUniformLocation(program, 'VP');
 
         // create the texture
-        texture = context.createTexture();
-        context.bindTexture(GL.TEXTURE_2D, texture);
+        fontTexture = context.createTexture();
+        context.bindTexture(GL.TEXTURE_2D, fontTexture);
 
-        // temporarily create a 1x1 blue texture
+        // temporarily create a 1x1 magenta 'loading' texture
         context.texImage2D(GL.TEXTURE_2D, 0, GL.RGBA, 1, 1, 0, GL.RGBA, GL.UNSIGNED_BYTE,
-              new js.html.Uint8Array([0, 0, 255, 255]));
+              new js.html.Uint8Array([255, 0, 255, 255]));
         textureLoc = context.getUniformLocation(program, 'texture');
 
         // load the image asynchronously
-        image = js.Browser.window.document.createImageElement();
-        image.addEventListener('load', function() {
-            context.bindTexture(GL.TEXTURE_2D, texture);
-            context.pixelStorei(GL.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1);
+        fontImage = js.Browser.window.document.createImageElement();
+        fontImage.addEventListener('load', function() {
+            context.bindTexture(GL.TEXTURE_2D, fontTexture);
+            //context.pixelStorei(GL.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1);
             context.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE);
             context.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_T, GL.CLAMP_TO_EDGE);
             context.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.NEAREST);
             context.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
-            context.texImage2D(GL.TEXTURE_2D, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, image);
+            context.texImage2D(GL.TEXTURE_2D, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, fontImage);
         });
-        image.src = Tusk.textureSrc;
+        fontImage.src = Tusk.fontTextureSrc;
 
         // create the buffer
         buffer = context.createBuffer();
@@ -93,20 +93,19 @@ class DebugView {
     }
 
     public function draw():Void {
+        context.viewport(0, 0, Std.int(Mammoth.width), Std.int(Mammoth.height));
+        context.scissor(0, 0, Std.int(Mammoth.width), Std.int(Mammoth.height));
+
         Tusk.screenWidth = mammoth.Mammoth.width;
         Tusk.screenHeight = mammoth.Mammoth.height;
 
         if(Tusk.numVertices == 0) return;
         
-        context.enable(GL.CULL_FACE);
-        context.cullFace(GL.BACK);
-
+        context.disable(GL.CULL_FACE);
         context.disable(GL.DEPTH_TEST);
-        context.depthFunc(GL.ALWAYS);
-        context.depthMask(false);
 
         context.enable(GL.BLEND);
-        context.blendFunc(GL.ONE, GL.ONE_MINUS_SRC_ALPHA);
+        context.blendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA);
 
         context.useProgram(program);
 
@@ -117,14 +116,14 @@ class DebugView {
         context.uniform1i(textureLoc, 0);
 
         context.activeTexture(GL.TEXTURE0);
-        context.bindTexture(GL.TEXTURE_2D, texture);
+        context.bindTexture(GL.TEXTURE_2D, fontTexture);
 
         context.enableVertexAttribArray(positionLoc);
-        context.vertexAttribPointer(positionLoc, 3, GL.FLOAT, false, 9*4, 0);
+        context.vertexAttribPointer(positionLoc, 2, GL.FLOAT, false, 8*4, 0);
         context.enableVertexAttribArray(uvLoc);
-        context.vertexAttribPointer(uvLoc, 2, GL.FLOAT, false, 9*4, 3*4);
+        context.vertexAttribPointer(uvLoc, 2, GL.FLOAT, false, 8*4, 2*4);
         context.enableVertexAttribArray(colourLoc);
-        context.vertexAttribPointer(colourLoc, 4, GL.FLOAT, false, 9*4, 5*4);
+        context.vertexAttribPointer(colourLoc, 4, GL.FLOAT, false, 8*4, 4*4);
 
         context.drawArrays(GL.TRIANGLES, 0, Tusk.numVertices);
     }

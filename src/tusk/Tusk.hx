@@ -11,25 +11,32 @@ typedef FloatArray = haxe.io.Float32Array;
 class Tusk {
     public static var vertexShaderSrc(default, null):String = FileContents.contents('tusk/shaders/vertex.glsl');
     public static var fragmentShaderSrc(default, null):String = FileContents.contents('tusk/shaders/fragment.glsl');
-    public static var textureSrc(default, null):String = 'data:image/png;base64,' + FileContents.base64contents('tusk/texture.png');
+    public static var fontTextureSrc(default, null):String = 'data:image/png;base64,' + FileContents.base64contents('tusk/font/coderscrux.png');
+    public static var fontSrc(default, null):String = FileContents.contents('tusk/font/coderscrux.json');
 
     public static var screenWidth(default, set):Float = 1;
     private static function set_screenWidth(w:Float):Float {
-        screenWidth = w;
-        GLM.orthographic(0, screenWidth, 0, screenHeight, 0, 1, vpMatrix);
-        return screenWidth;
+        if(w != screenWidth) vpDirty = true;
+        return screenWidth = w;
     }
 
     public static var screenHeight(default, set):Float = 1;
     private static function set_screenHeight(h:Float):Float {
-        screenHeight = h;
-        GLM.orthographic(0, screenWidth, 0, screenHeight, 0, 1, vpMatrix);
-        return screenHeight;
+        if(h != screenHeight) vpDirty = true;
+        return screenHeight = h;
     }
 
-    public static var vpMatrix(default, null):Mat4 = Mat4.identity(new Mat4());
+    private static var vpDirty:Bool = true;
+    public static var vpMatrix(get, null):Mat4 = Mat4.identity(new Mat4());
+    private static function get_vpMatrix():Mat4 {
+        if(vpDirty) {
+            GLM.orthographic(0, screenWidth, screenHeight, 0, 0, 1, vpMatrix);
+            vpDirty = false;
+        }
+        return vpMatrix;
+    }
 
-    public static var buffer(default, null):FloatArray = new FloatArray(9 * 6 * 64);
+    public static var buffer(default, null):FloatArray = new FloatArray(8 * 6 * 32);
     public static var numVertices(default, null):Int = 0;
 
     private function new() {}
@@ -38,43 +45,44 @@ class Tusk {
         numVertices = 0;
     }
 
-    private static function addVertex(x:Float, y:Float, z:Float, u:Float, v:Float, colour:Vec4):Void {
-        var i:Int = numVertices * 9;
+    private static function addVertex(x:Float, y:Float, u:Float, v:Float, colour:Vec4):Void {
+        var i:Int = numVertices * 8;
         buffer[i + 0] = x;
         buffer[i + 1] = y;
-        buffer[i + 2] = z;
-        buffer[i + 3] = u;
-        buffer[i + 4] = v;
-        buffer[i + 5] = colour.r;
-        buffer[i + 6] = colour.g;
-        buffer[i + 7] = colour.b;
-        buffer[i + 8] = colour.a;
+        buffer[i + 2] = u;
+        buffer[i + 3] = v;
+        buffer[i + 4] = colour.r;
+        buffer[i + 5] = colour.g;
+        buffer[i + 6] = colour.b;
+        buffer[i + 7] = colour.a;
         numVertices++;
 
-        if((numVertices * 9) >= buffer.length) {
+        if((numVertices * 8) >= buffer.length) {
             // resize the buffer
-            var newBuffer:FloatArray = new FloatArray(buffer.length + (9 * 6 * 64));
+            var newBuffer:FloatArray = new FloatArray(buffer.length + (8 * 6 * 32));
             for(i in 0...buffer.length)
                 newBuffer[i] = buffer[i];
             buffer = newBuffer;
         }
     }
 
-    public static function drawWindow(x:Float, y:Float, w:Float, h:Float, z:Float = 1.0, title:String):Void {
-        // draw the header
-        addVertex(x + 0, y + 0, z, 0, 0, TuskConfig.window_headerColour);
-        addVertex(x + 0, y + TuskConfig.window_headerHeight, z, 0, 0, TuskConfig.window_headerColour);
-        addVertex(x + w, y + 0, z, 0, 0, TuskConfig.window_headerColour);
-        addVertex(x + w, y + 0, z, 0, 0, TuskConfig.window_headerColour);
-        addVertex(x + 0, y + TuskConfig.window_headerHeight, z, 0, 0, TuskConfig.window_headerColour);
-        addVertex(x + w, y + TuskConfig.window_headerHeight, z, 0, 0, TuskConfig.window_headerColour);
+    public static function drawWindow(x:Float, y:Float, w:Float, h:Float, title:String):Void {
+        // draw the body
+        addVertex(x + 0, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_bodyColour);
+        addVertex(x + w, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_bodyColour);
+        addVertex(x + 0, y + h, 1, 1, TuskConfig.window_bodyColour);
 
-        // draw the main body
-        addVertex(x + 0, y + TuskConfig.window_headerHeight, z, 0, 0, TuskConfig.window_bodyColour);
-        addVertex(x + 0, y + h, z, 0, 0, TuskConfig.window_bodyColour);
-        addVertex(x + w, y + TuskConfig.window_headerHeight, z, 0, 0, TuskConfig.window_bodyColour);
-        addVertex(x + w, y + TuskConfig.window_headerHeight, z, 0, 0, TuskConfig.window_bodyColour);
-        addVertex(x + 0, y + h, z, 0, 0, TuskConfig.window_bodyColour);
-        addVertex(x + w, y + h, z, 0, 0, TuskConfig.window_bodyColour);
+        addVertex(x + 0, y + h, 1, 1, TuskConfig.window_bodyColour);
+        addVertex(x + w, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_bodyColour);
+        addVertex(x + w, y + h, 1, 1, TuskConfig.window_bodyColour);
+        
+        // draw the header
+        addVertex(x + 0, y + 0, 1, 1, TuskConfig.window_headerColour);
+        addVertex(x + w, y + 0, 1, 1, TuskConfig.window_headerColour);
+        addVertex(x + 0, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_headerColour);
+
+        addVertex(x + 0, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_headerColour);
+        addVertex(x + w, y + 0, 1, 1, TuskConfig.window_headerColour);
+        addVertex(x + w, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_headerColour);
     }
 }

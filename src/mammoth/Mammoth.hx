@@ -95,7 +95,7 @@ class Mammoth {
         postUpdatePhase.update(dt);
 
         Tusk.newFrame();
-        Tusk.drawWindow(0, 0, 200, 200, 0, 'Derp');
+        Tusk.drawWindow((width - 200) / 2, (height - 100) / 2, 200, 100, 'Derp');
     }
 
     private static function onRender(dt:Float, alpha:Float):Void {

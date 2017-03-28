@@ -50,5 +50,6 @@ class Main {
             .catchError(function(e:Dynamic) {
                 Log.error(e);
             });
+        Mammoth.begin();
     }
 }
