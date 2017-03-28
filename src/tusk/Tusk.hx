@@ -10,10 +10,10 @@ typedef FloatArray = haxe.io.Float32Array;
 #end
 
 class Tusk {
-    public static var vertexShaderSrc(default, null):String = FileContents.contents('tusk/shaders/vertex.glsl');
-    public static var fragmentShaderSrc(default, null):String = FileContents.contents('tusk/shaders/fragment.glsl');
-    public static var fontTextureSrc(default, null):String = 'data:image/png;base64,' + FileContents.base64contents('tusk/font/coderscrux.png');
-    public static var fontSrc(default, null):String = FileContents.contents('tusk/font/coderscrux.json');
+    public static var vertexShaderSrc(default, null):String = FileContents.contents('tusk/assets/vertex.glsl');
+    public static var fragmentShadersrc(default, null):String = FileContents.contents('tusk/assets/fragment.glsl');
+    public static var fontTextureSrc(default, null):String = 'data:image/png;base64,' + FileContents.base64contents('tusk/assets/coderscrux.png');
+    public static var fontSrc(default, null):String = FileContents.contents('tusk/assets/coderscrux.json');
 
     public static var screenWidth(default, set):Float = 1;
     private static function set_screenWidth(w:Float):Float {
