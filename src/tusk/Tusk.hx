@@ -1,6 +1,7 @@
 package tusk;
 
 import tusk.macros.FileContents;
+import tusk.text.Font;
 
 #if js
 typedef FloatArray = js.html.Float32Array;
@@ -39,7 +40,13 @@ class Tusk {
     public static var buffer(default, null):FloatArray = new FloatArray(8 * 6 * 32);
     public static var numVertices(default, null):Int = 0;
 
+    private static var font:Font;
+
     private function new() {}
+
+    public static function initialize():Void {
+        font = Font.fromFontSrc(fontSrc);
+    }
 
     public static function newFrame():Void {
         numVertices = 0;
@@ -66,6 +73,13 @@ class Tusk {
         }
     }
 
+    public static function drawText(x:Float, y:Float, text:String, ?colour:Vec4):Void {
+        if(colour == null) colour = TuskConfig.text_Colour;
+        font.print(x, y, text, function(_x:Float, _y:Float, _u:Float, _v:Float):Void {
+            addVertex(_x, _y, _u, _v, colour);
+        });
+    }
+
     public static function drawWindow(x:Float, y:Float, w:Float, h:Float, title:String):Void {
         // draw the body
         addVertex(x + 0, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_bodyColour);
@@ -84,5 +98,10 @@ class Tusk {
         addVertex(x + 0, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_headerColour);
         addVertex(x + w, y + 0, 1, 1, TuskConfig.window_headerColour);
         addVertex(x + w, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_headerColour);
+
+        // draw the title over the header
+        font.print(x + 2, y + TuskConfig.window_headerHeight - font.descent - 2, title, function(_x:Float, _y:Float, _u:Float, _v:Float):Void {
+            addVertex(_x, _y, _u, _v, TuskConfig.window_headerTextColour);
+        });
     }
 }

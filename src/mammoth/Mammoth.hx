@@ -55,6 +55,7 @@ class Mammoth {
         if(Defines.isDefined("window.full"))
             graphics.fullWindow(true);
         
+        Tusk.initialize();
         debugView = new DebugView();
 
         // calculate the clock period
