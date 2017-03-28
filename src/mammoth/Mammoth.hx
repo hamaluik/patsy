@@ -16,7 +16,9 @@ package mammoth;
 import edge.Engine;
 import edge.Phase;
 import mammoth.Graphics;
+import mammoth.debug.DebugView;
 import mammoth.macros.Defines;
+import tusk.Tusk;
 
 class Mammoth {
 	// parts of our system
@@ -27,6 +29,7 @@ class Mammoth {
     public static var renderPhase:Phase;
 
     public static var graphics:Graphics = new Graphics();
+    private static var debugView:DebugView;
 
     // public timing variables
     public static var time(get, never):Float;
@@ -51,6 +54,8 @@ class Mammoth {
         graphics.init(title, width, height);
         if(Defines.isDefined("window.full"))
             graphics.fullWindow(true);
+        
+        debugView = new DebugView();
 
         // calculate the clock period
         Timing.dt = 1 / updateRate;
@@ -88,9 +93,13 @@ class Mammoth {
         preUpdatePhase.update(dt);
         updatePhase.update(dt);
         postUpdatePhase.update(dt);
+
+        Tusk.newFrame();
+        Tusk.drawWindow(0, 0, 200, 200, 0, 'Derp');
     }
 
     private static function onRender(dt:Float, alpha:Float):Void {
         renderPhase.update(dt);
+        debugView.draw();
     }
 }
