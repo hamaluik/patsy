@@ -33,8 +33,8 @@ class Main {
                 for(entity in Mammoth.engine.entities()) {
                     var t:mammoth.components.Transform = entity.get(mammoth.components.Transform);
                     if(t != null) {
-                        if(t.name == 'CameraRoot') {
-                            mammoth.Log.info('Adding spin to "CameraRoot"!');
+                        if(t.name == 'Cube') {
+                            mammoth.Log.info('Adding spin to "Cube"!');
                             var spin:components.Spin = new components.Spin();
                             spin.angle = 0;
                             spin.speed = Math.PI / 10;
