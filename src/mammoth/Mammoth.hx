@@ -29,6 +29,8 @@ class Mammoth {
     public static var renderPhase:Phase;
 
     public static var graphics:Graphics = new Graphics();
+    public static var input:Input = new Input();
+    public static var stats:Stats = new Stats();
     private static var debugView:DebugView;
 
     // public timing variables
@@ -54,8 +56,7 @@ class Mammoth {
         graphics.init(title, width, height);
         if(Defines.isDefined("window.full"))
             graphics.fullWindow(true);
-        
-        Tusk.initialize();
+        input.init();
         debugView = new DebugView();
 
         // calculate the clock period
@@ -91,16 +92,28 @@ class Mammoth {
     }
 
     private static function onUpdate(dt:Float):Void {
+        Tusk.draw.newFrame();
+        Tusk.updateInput(input.mouseX, input.mouseY, input.mouseDown);
+
         preUpdatePhase.update(dt);
         updatePhase.update(dt);
         postUpdatePhase.update(dt);
 
-        Tusk.newFrame();
-        Tusk.drawWindow((width - 200) / 2, (height - 100) / 2, 200, 100, 'Derp');
+        Tusk.window(tusk.Control.uuid(), Mammoth.width - 160, 10, 150, 75, 'Stats');
+        Tusk.label('Render t: ' + Math.fround(stats.renderTime * 1000 * 10) / 10 + 'ms');
+        Tusk.label('FPS: ' + Math.fround(stats.fps * 10) / 10);
+        Tusk.label('Draw calls: ' + stats.drawCalls);
+        Tusk.label('Triangles: ' + stats.triangles);
     }
 
     private static function onRender(dt:Float, alpha:Float):Void {
+        stats.drawCalls = 0;
+        stats.triangles = 0;
+
+        stats.startRenderTimer();
         renderPhase.update(dt);
+        stats.endRenderTimer();
+
         debugView.draw();
     }
 }

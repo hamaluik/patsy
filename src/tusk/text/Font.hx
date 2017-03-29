@@ -40,6 +40,49 @@ class Font {
         spaceWidth = glyphs.get(' '.charCodeAt(0)).xAdvance;
     }
 
+    public function textWidth(text:String):Float {
+        var width:Float = 0, maxWidth:Float = 0;
+
+        for(i in 0...text.length) {
+            var idx:Int = text.charCodeAt(i);
+            if(idx == null) continue;
+
+            // deal with special characters
+            width += switch(idx) {
+                case 32: { // ' '
+                    spaceWidth;
+                }
+
+                case 10: { // '\n'
+                    if(width > maxWidth)
+                        maxWidth = width;
+                    -1 * width;
+                }
+
+                case 13: { // '\r'
+                    if(width > maxWidth)
+                        maxWidth = width;
+                    -1 * width;
+                }
+
+                case 9: { // '\t'
+                    4 * spaceWidth;
+                }
+
+                case _: {
+                    var g:Glyph = glyphs.get(idx);
+                    if(g == null) g = unknownGlyph;
+                    g.xAdvance;
+                }
+            }
+        }
+
+        if(width > maxWidth)
+            maxWidth = width;
+
+        return maxWidth;
+    }
+
     public function print(x:Float, y:Float, text:String, addVertex:AddVertexFunc):Void {
         var _x:Float = x;
         var _y:Float = y;

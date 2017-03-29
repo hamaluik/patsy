@@ -96,10 +96,10 @@ class DebugView {
         context.viewport(0, 0, Std.int(Mammoth.width), Std.int(Mammoth.height));
         context.scissor(0, 0, Std.int(Mammoth.width), Std.int(Mammoth.height));
 
-        Tusk.screenWidth = mammoth.Mammoth.width;
-        Tusk.screenHeight = mammoth.Mammoth.height;
+        Tusk.draw.screenWidth = mammoth.Mammoth.width;
+        Tusk.draw.screenHeight = mammoth.Mammoth.height;
 
-        if(Tusk.numVertices == 0) return;
+        if(Tusk.draw.numVertices == 0) return;
         
         context.disable(GL.CULL_FACE);
         context.disable(GL.DEPTH_TEST);
@@ -110,9 +110,9 @@ class DebugView {
         context.useProgram(program);
 
         context.bindBuffer(GL.ARRAY_BUFFER, buffer);
-        context.bufferData(GL.ARRAY_BUFFER, Tusk.buffer, GL.DYNAMIC_DRAW);
+        context.bufferData(GL.ARRAY_BUFFER, Tusk.draw.buffer, GL.DYNAMIC_DRAW);
 
-        context.uniformMatrix4fv(vpLoc, false, cast(Tusk.vpMatrix));
+        context.uniformMatrix4fv(vpLoc, false, cast(Tusk.draw.vpMatrix));
         context.uniform1i(textureLoc, 0);
 
         context.activeTexture(GL.TEXTURE0);
@@ -125,6 +125,6 @@ class DebugView {
         context.enableVertexAttribArray(colourLoc);
         context.vertexAttribPointer(colourLoc, 4, GL.FLOAT, false, 8*4, 4*4);
 
-        context.drawArrays(GL.TRIANGLES, 0, Tusk.numVertices);
+        context.drawArrays(GL.TRIANGLES, 0, Tusk.draw.numVertices);
     }
 }

@@ -131,6 +131,8 @@ class RenderSystem implements ISystem {
 
             // and draw those suckers!
             g.context.drawElements(GL.TRIANGLES, mesh.vertexCount, GL.UNSIGNED_SHORT, 0);
+            Mammoth.stats.drawCalls++;
+            Mammoth.stats.triangles += Std.int(mesh.vertexCount / 3);
         }
     }
 }

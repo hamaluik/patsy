@@ -1,7 +1,7 @@
 package tusk;
 
+import haxe.ds.IntMap;
 import tusk.macros.FileContents;
-import tusk.text.Font;
 
 #if js
 typedef FloatArray = js.html.Float32Array;
@@ -11,97 +11,89 @@ typedef FloatArray = haxe.io.Float32Array;
 
 class Tusk {
     public static var vertexShaderSrc(default, null):String = FileContents.contents('tusk/assets/vertex.glsl');
-    public static var fragmentShadersrc(default, null):String = FileContents.contents('tusk/assets/fragment.glsl');
+    public static var fragmentShaderSrc(default, null):String = FileContents.contents('tusk/assets/fragment.glsl');
     public static var fontTextureSrc(default, null):String = 'data:image/png;base64,' + FileContents.base64contents('tusk/assets/coderscrux.png');
     public static var fontSrc(default, null):String = FileContents.contents('tusk/assets/coderscrux.json');
 
-    public static var screenWidth(default, set):Float = 1;
-    private static function set_screenWidth(w:Float):Float {
-        if(w != screenWidth) vpDirty = true;
-        return screenWidth = w;
-    }
-
-    public static var screenHeight(default, set):Float = 1;
-    private static function set_screenHeight(h:Float):Float {
-        if(h != screenHeight) vpDirty = true;
-        return screenHeight = h;
-    }
-
-    private static var vpDirty:Bool = true;
-    public static var vpMatrix(get, null):Mat4 = Mat4.identity(new Mat4());
-    private static function get_vpMatrix():Mat4 {
-        if(vpDirty) {
-            GLM.orthographic(0, screenWidth, screenHeight, 0, 0, 1, vpMatrix);
-            vpDirty = false;
-        }
-        return vpMatrix;
-    }
-
-    public static var buffer(default, null):FloatArray = new FloatArray(8 * 6 * 32);
-    public static var numVertices(default, null):Int = 0;
-
-    private static var font:Font;
+    public static var draw(default, null):Draw = new Draw();
+    public static var controls(default, null):IntMap<Control> = new IntMap<Control>();
 
     private function new() {}
 
-    public static function initialize():Void {
-        font = Font.fromFontSrc(fontSrc);
+    private static var mousePos:Vec2 = new Vec2();
+    private static var mousePressed:Bool = false;
+    private static var mouseDown:Bool = false;
+    private static var mouseReleased:Bool = false;
+
+    private static var nextPos:Vec2 = new Vec2();
+    private static var currentWidth:Float = 0;
+
+    public static function updateInput(mx:Float, my:Float, mouseDown:Bool):Void {
+        mousePos.set(mx, my);
+
+        Tusk.mousePressed = mouseDown && !Tusk.mouseDown;
+        Tusk.mouseReleased = !mouseDown && Tusk.mouseDown;
+        Tusk.mouseDown = mouseDown;
     }
 
-    public static function newFrame():Void {
-        numVertices = 0;
+    private inline static function getControl(uuid:Int):Control {
+        // get or create the control
+        if(!controls.exists(uuid))
+            controls.set(uuid, new Control());
+        return controls.get(uuid);
     }
 
-    private static function addVertex(x:Float, y:Float, u:Float, v:Float, colour:Vec4):Void {
-        var i:Int = numVertices * 8;
-        buffer[i + 0] = x;
-        buffer[i + 1] = y;
-        buffer[i + 2] = u;
-        buffer[i + 3] = v;
-        buffer[i + 4] = colour.r;
-        buffer[i + 5] = colour.g;
-        buffer[i + 6] = colour.b;
-        buffer[i + 7] = colour.a;
-        numVertices++;
+    private static function updateInputState(control:Control, x:Float, y:Float, w:Float, h:Float):Void {
+        // skip all this logic if we're disabled
+        if(control.state == InputState.Disabled) return;
+        
+        // detect hovers
+        var mousedOver:Bool = mousePos.x >= x && mousePos.x <= x + w && mousePos.y >= y && mousePos.y <= y + h;
+        if(mousedOver) {
+            if(control.state == InputState.Normal) {
+                control.state = InputState.Hovered;
+            }
+            if(Tusk.mousePressed) {
+                control.state = InputState.Pressed;
+            }
+        }
+        else if(control.state == InputState.Hovered) {
+            control.state = InputState.Normal;
+        }
 
-        if((numVertices * 8) >= buffer.length) {
-            // resize the buffer
-            var newBuffer:FloatArray = new FloatArray(buffer.length + (8 * 6 * 32));
-            for(i in 0...buffer.length)
-                newBuffer[i] = buffer[i];
-            buffer = newBuffer;
+        // detect clicks
+        control.clicked = false;
+        if(control.state == InputState.Pressed && Tusk.mouseReleased) {
+            control.clicked = true;
+
+            if(mousedOver) {
+                control.state = InputState.Hovered;
+            }
+            else {
+                control.state = InputState.Normal;
+            }
         }
     }
 
-    public static function drawText(x:Float, y:Float, text:String, ?colour:Vec4):Void {
-        if(colour == null) colour = TuskConfig.text_Colour;
-        font.print(x, y, text, function(_x:Float, _y:Float, _u:Float, _v:Float):Void {
-            addVertex(_x, _y, _u, _v, colour);
-        });
+    public static function window(uuid:Int, x:Float, y:Float, w:Float, h:Float, title:String):Void {
+        // TODO
+        var control:Control = getControl(uuid);
+
+        nextPos.set(x + 2, y + 2 + TuskConfig.window_headerHeight);
+        currentWidth = w - 4;
+        draw.window(x, y, w, h, title);
     }
 
-    public static function drawWindow(x:Float, y:Float, w:Float, h:Float, title:String):Void {
-        // draw the body
-        addVertex(x + 0, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_bodyColour);
-        addVertex(x + w, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_bodyColour);
-        addVertex(x + 0, y + h, 1, 1, TuskConfig.window_bodyColour);
+    public static function label(text:String):Void {
+        draw.text(nextPos.x, nextPos.y, text);
+        nextPos.y += draw.font.lineHeight + 4;
+    }
 
-        addVertex(x + 0, y + h, 1, 1, TuskConfig.window_bodyColour);
-        addVertex(x + w, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_bodyColour);
-        addVertex(x + w, y + h, 1, 1, TuskConfig.window_bodyColour);
-        
-        // draw the header
-        addVertex(x + 0, y + 0, 1, 1, TuskConfig.window_headerColour);
-        addVertex(x + w, y + 0, 1, 1, TuskConfig.window_headerColour);
-        addVertex(x + 0, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_headerColour);
-
-        addVertex(x + 0, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_headerColour);
-        addVertex(x + w, y + 0, 1, 1, TuskConfig.window_headerColour);
-        addVertex(x + w, y + TuskConfig.window_headerHeight, 1, 1, TuskConfig.window_headerColour);
-
-        // draw the title over the header
-        font.print(x + 2, y + TuskConfig.window_headerHeight - font.descent - 2, title, function(_x:Float, _y:Float, _u:Float, _v:Float):Void {
-            addVertex(_x, _y, _u, _v, TuskConfig.window_headerTextColour);
-        });
+    public static function button(uuid:Int, label:String):Bool {
+        var control:Control = getControl(uuid);
+        updateInputState(control, nextPos.x, nextPos.y, currentWidth, draw.font.lineHeight + 4);
+        draw.button(nextPos.x, nextPos.y, currentWidth, draw.font.lineHeight + 4, label, control.state);
+        nextPos.y += draw.font.lineHeight + 4 + 4;
+        return control.clicked;
     }
 }

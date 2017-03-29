@@ -9,7 +9,7 @@ class Glyph {
     public var offset:Vec2;
 
     public function new(char:BMFont.Char, imSize:Vec2) {
-        uvMin = new Vec2((char.x + 0.5) / imSize.x, (char.y + 0.5) / imSize.y);
+        uvMin = new Vec2(char.x / imSize.x, char.y / imSize.y);
         uvMax = new Vec2(uvMin.x + (char.width / imSize.x), uvMin.y + (char.height / imSize.y));
 
         xAdvance = char.xadvance;
