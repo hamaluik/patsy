@@ -5,10 +5,6 @@
 -lib glm
 -lib promhx
 
--D window.width=960
--D window.height=540
--D window.full
-
 -D log_fatal
 -D log_error
 -D log_warning
@@ -20,7 +16,6 @@
 -dce full
 
 --macro mammoth.macros.Assets.copyProjectAssets()
---macro mammoth.macros.Assets.makeIndex('Patsy')
 
 #-lib closure
 #-D closure_advanced

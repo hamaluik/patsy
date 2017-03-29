@@ -27,10 +27,11 @@ class CameraSystem implements ISystem {
         camera.v.invert(camera.v);
 
         // check for aspect ratio changes
-        var aspect:Float = Mammoth.width / Mammoth.height;
-        if(aspect != camera.aspect) {
+        var aspect:Float = Mammoth.aspectRatio;
+        /*if(aspect != camera.aspect) {
             camera.pDirty = true;
-        }
+        }*/
+        camera.pDirty = true;
 
         if(camera.pDirty) {
             camera.p = switch (camera.projection) {

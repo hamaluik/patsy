@@ -44,6 +44,8 @@ class Mammoth {
     private inline static function get_width():Float return graphics.width;
     public static var height(get, never):Float;
     private inline static function get_height():Float return graphics.height;
+    public static var aspectRatio(get, never):Float;
+    private inline static function get_aspectRatio():Float return graphics.aspectRatio;
 
     static macro function getDefine(key:String):Expr return macro $v{Context.definedValue(key)};
     static macro function isDefined(key:String):Expr return macro $v{Context.defined(key)};
@@ -54,8 +56,6 @@ class Mammoth {
 
         // initialize our subsystems
         graphics.init(title, width, height);
-        if(Defines.isDefined("window.full"))
-            graphics.fullWindow(true);
         input.init();
         debugView = new DebugView();
 
@@ -111,6 +111,7 @@ class Mammoth {
         stats.triangles = 0;
 
         stats.startRenderTimer();
+        graphics.checkWindowSize();
         renderPhase.update(dt);
         stats.endRenderTimer();
 

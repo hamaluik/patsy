@@ -56,25 +56,6 @@ class Assets {
         Sys.println('[mammoth] copied ${numCopied} project assets to bin!');
     }
 
-    public static function makeIndex(title:String) {
-        var indexFile = Path.join([Sys.getCwd(), "bin", "index.html"]);
-        File.saveContent(indexFile, '<html>
-    <head>
-        <title>${title}</title>
-        <style>
-            html, body {
-                width: 100%;
-                height: 100%;
-                margin: 0px;
-            }
-        </style>
-    </head>
-    <body>
-        <script src="game.js"></script>
-    </body>
-</html>');
-    }
-
     public static function buildAssetList():Array<Field> {
         var fields:Array<Field> = Context.getBuildFields();
 

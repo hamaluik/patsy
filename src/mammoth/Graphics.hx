@@ -27,15 +27,15 @@ class Graphics {
     private var anisotropicFilter:Dynamic;
     private var drawBuffers:Dynamic;
 
-    private var unFullWidth:Int;
-    private var unFullHeight:Int;
-    private var fullWindowed:Bool = false;
-
     private var width(get, never):Float;
-    private inline function get_width():Float return context.canvas.width;
+    private inline function get_width():Float return context.drawingBufferWidth;
 
     private var height(get, never):Float;
-    private inline function get_height():Float return context.canvas.height;
+    private inline function get_height():Float return context.drawingBufferHeight;
+
+    private var aspectRatio(get, never):Float;
+    private inline function get_aspectRatio():Float
+        return (context.canvas.clientWidth / context.canvas.clientHeight);
 
     private function new() {}
 
@@ -48,14 +48,14 @@ class Graphics {
             alpha: false,
             antialias: false,
             depth: true,
-            premultipliedAlpha: true,
+            premultipliedAlpha: false,
             preserveDrawingBuffer: true,
             stencil: true,
         });
 
         // add the GL extensions
         if(context != null) {
-            context.pixelStorei(GL.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1);
+            //context.pixelStorei(GL.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1);
             context.getExtension("OES_texture_float");
             context.getExtension("OES_texture_float_linear");
             halfFloat = context.getExtension("OES_texture_half_float");
@@ -71,32 +71,18 @@ class Graphics {
 
         // add the canvas to the body
         Browser.document.body.appendChild(canvas);
-        context.canvas.width = width;
-        context.canvas.height = height;
-
-        // listen to resize events
-        Browser.window.onresize = onResize;
     }
 
-    private function fullWindow(full:Bool) {
-        if(full) {
-            unFullWidth = context.canvas.width;
-            unFullHeight = context.canvas.height;
+    public function checkWindowSize() {
+        var displayWidth:Int  = Math.floor(context.canvas.clientWidth  * Browser.window.devicePixelRatio);
+        var displayHeight:Int = Math.floor(context.canvas.clientHeight * Browser.window.devicePixelRatio);
 
-            context.canvas.width = Browser.window.innerWidth;
-            context.canvas.height = Browser.window.innerHeight;
-        }
-        else {
-            context.canvas.width = unFullWidth;
-            context.canvas.height = unFullHeight;
-        }
-        fullWindowed = full;
-    }
+        if(context.canvas.width != displayWidth || context.canvas.height != displayHeight) {
+            context.canvas.width = displayWidth;
+            context.canvas.height = displayHeight;
 
-    private function onResize() {
-        if(fullWindowed) {
-            context.canvas.width = Browser.window.innerWidth;
-            context.canvas.height = Browser.window.innerHeight;
+            Log.debug('Resized canvas to ${displayWidth}x${displayHeight}');
+            Log.debug('Mammoth size: ${width}x${height}');
         }
     }
 
